@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="widget-list.html"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand">
+                Widget Edit
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a href="widget-list.html"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <label for="widget-image-name">Name</label>
+    <input class="form-control"
+           type="text"
+           placeholder="name"
+           id="widget-image-name"/>
+
+    <label for="widget-image-text">Text</label>
+    <input class="form-control"
+           type="text"
+           placeholder="text"
+           id="widget-image-text"/>
+
+    <label for="widget-image-url">URL</label>
+    <input class="form-control"
+           type="url"
+           placeholder="URL"
+           value="http://images.slideplayer.com/26/8426126/slides/slide_22.jpg"
+           id="widget-image-url"/>
+
+    <label for="widget-image-width">Width</label>
+    <input class="form-control"
+           type="number"
+           min="1"
+           max="100"
+           placeholder="width"
+           value="100"
+           id="widget-image-width"/>
+
+    <label for="widget-image-file">Upload</label>
+    <input id="widget-image-file"
+           type="file"
+           class="form-control"/>
+
+    <a href=""
+       class="btn btn-block btn-primary">Upload Image</a>
+
+    <a href="widget-list.html"
+       class="btn btn-block btn-danger">Delete</a>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="../user/profile.html"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

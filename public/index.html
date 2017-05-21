@@ -2,29 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Kristy's Web Dev Course Home Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Archivo+Black|Spinnaker">
+    <link href="css/style.css" rel="stylesheet"/>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Web Dev Course Home Page</h1>
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"
+               href="">
+                <span class="glyphicon glyphicon-home"></span>
+                Home
+            </a>
+        </div>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="assignment/index.html">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/kristychen8/chen-kristy-webdev">Public repository at GitHub.com</a>
-        </li>
-    </ul>
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="test/index.html"
+                       class="navbar-link">
+                    <span class="glyphicon glyphicon-leaf"></span>
+                    Test MongoDB
+                </a></li>
+
+                <li><a href="assignment/user/login.html"
+                       class="navbar-link">
+                    <span class="glyphicon glyphicon-book"></span>
+                    Assignment
+                </a></li>
+
+                <li><a href="project/index.html"
+                       class="navbar-link">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    Project
+                </a></li>
+
+                <li><a href="https://github.com/kristychen8/chen-kristy-webdev"
+                       class="navbar-link">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                    Github
+                </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="intro">
+    <img src="css/profile.png" class="img-circle" alt="Cinque Terre" width="250" height="250">
+    <p class="intro-description">My name is Kristy Chen and I am a second year undergraduate student at Northeastern
+        University. I am currently pursuing a Bachelor of Science in Combined Computer Science and Business
+        Administration with a concentration in Finance. I also enjoy hackathons and CS conferences, since I get to
+        develop projects with brilliant developers. You can find more about me and my personal projects
+        <a href="http://kristychen8.github.io">here</a>.</p>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+            <p class="navbar-text-footer">
+                Contact:
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                Email: chen.kr@husky.neu.edu
+            </p>
+        </div>
+    </div>
+</nav>
 </body>
 </html>

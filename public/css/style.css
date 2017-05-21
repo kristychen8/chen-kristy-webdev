@@ -1,0 +1,53 @@
+body {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-image: url('https://s-media-cache-ak0.pinimg.com/736x/44/f3/ed/44f3ed6f2d1f2a6a3fe82ee58a045134.jpg');
+    background-attachment: fixed;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    font-family: 'Spinnaker', sans-serif;
+    color: black;
+    text-align: center;
+}
+
+.navbar-default {
+    background-color: #88C1F6;
+    border-color: #88C1F6;
+}
+
+.navbar-default .navbar-brand,.navbar-text {
+    color: white;
+    font-weight: bold;
+}
+
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-text a{
+    padding-left: 15px;
+}
+
+.fa-github{
+    font-size:20px
+}
+
+.navbar-toggle.collapsed {
+    background-color: white;
+}
+
+.navbar-text-footer {
+    text-align:center;
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.intro-description, .into {
+    padding: 30px;
+    font-size: 20px;
+}

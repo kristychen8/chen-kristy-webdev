@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <div class="row">
                 <div class="col-xs-4 hidden-xs">
                     <p class="navbar-text pull-left">
-                        <a href="website-list.html"
+                        <a href="#!/user/:uid/website"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -26,7 +15,7 @@
                     </a>
 
                     <p class="navbar-text pull-right">
-                        <a href="website-new.html"
+                        <a href="#!/user/:uid/website/new"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
@@ -36,7 +25,7 @@
                 <div class="col-sm-6">
                     <div class="visible-xs">
                         <p class="navbar-text pull-left">
-                            <a href="website-list.html"
+                            <a href="#!/user/:uid/website"
                                class="navbar-link">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                             </a>
@@ -49,7 +38,7 @@
                 </div>
 
                 <p class="navbar-text pull-right">
-                    <a href="website-list.html"
+                    <a href="#!/user/:uid/website"
                        class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
@@ -64,37 +53,37 @@
         <div class="col-xs-4 hidden-xs">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a href="../page/page-list.html">
+                    <a href="#!/user/:uid/website/:wid/page">
                         Address Book App
                     </a>
-                    <a href="website-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="../page/page-list.html">
+                    <a href="#!/user/:uid/website/:wid/page">
                         Blogger
                     </a>
-                    <a href="website-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="../page/page-list.html">
+                    <a href="#!/user/:uid/website/:wid/page">
                         Blogging App
                     </a>
-                    <a href="website-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="../page/page-list.html">
+                    <a href="#!/user/:uid/website/:wid/page">
                         Script Testing App
                     </a>
-                    <a href="website-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
@@ -114,7 +103,7 @@
                       placeholder="description"
                       class="form-control">Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com. Blogs can also be hosted in the registered custom domain of the blogger (like www.example.com). A user can have up to 100 blogs per account. Up until May 1, 2010, Blogger allowed users to publish blogs on other hosts, via FTP. All such blogs had (or still have) to be moved to Google's own servers, with domains other than blogspot.com allowed via custom URLs. Unlike WordPress.com, Blogger allows its users to use their own domain free of charge, while WordPress.com charges around $13 to use a custom domain. Blogger cannot be installed on a web server. One has to use DNS facilities to redirect a custom URL to a blogspot domain.</textarea>
 
-            <a href="website-list.html" class="btn btn-block btn-danger">Delete</a>
+            <a href="#!/user/:uid/website" class="btn btn-block btn-danger">Delete</a>
         </div>
     </div>
 </div>
@@ -124,7 +113,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.html"
+                <a href="#!/user/:uid"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
@@ -132,6 +121,3 @@
         </div>
     </div>
 </nav>
-
-</body>
-</html>

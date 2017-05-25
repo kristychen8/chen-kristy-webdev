@@ -1,32 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
-<nav class="navbar navbar-default navbar-fixed-top nav2">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <div class="row">
                 <div class="col-xs-4 hidden-xs">
                     <p class="navbar-text pull-left">
-                        <a href="page-list.html"
+                        <a href="#!/user/:uid/website"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
                     </p>
 
                     <a class="navbar-brand">
-                        Pages
+                        Websites
                     </a>
 
                     <p class="navbar-text pull-right">
-                        <a href="page-new.html"
+                        <a href="#!/user/:uid/website/new"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
@@ -36,7 +25,7 @@
                 <div class="col-sm-6">
                     <div class="visible-xs">
                         <p class="navbar-text pull-left">
-                            <a href="page-list.html"
+                            <a href="#!/user/:uid/website"
                                class="navbar-link">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                             </a>
@@ -44,12 +33,12 @@
                     </div>
 
                     <a class="navbar-brand">
-                        Edit Page
+                        New Website
                     </a>
                 </div>
 
                 <p class="navbar-text pull-right">
-                    <a href="page-list.html"
+                    <a href="#!/user/:uid/website"
                        class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
@@ -64,46 +53,37 @@
         <div class="col-xs-4 hidden-xs">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Blog Post
+                    <a href="#!/user/:uid/website/:wid/page">
+                        Address Book App
                     </a>
-                    <a href="page-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Blogs
+                    <a href="#!/user/:uid/website/:wid/page">
+                        Blogger
                     </a>
-                    <a href="page-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Home
+                    <a href="#!/user/:uid/website/:wid/page">
+                        Blogging App
                     </a>
-                    <a href="page-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        About
+                    <a href="#!/user/:uid/website/:wid/page">
+                        Script Testing App
                     </a>
-                    <a href="page-edit.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Contact Us
-                    </a>
-                    <a href="page-edit.html">
+                    <a href="#!/user/:uid/website/:wid">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
@@ -111,30 +91,27 @@
         </div>
 
         <div class="col-sm-8">
-            <label for="page-edit-name">Name</label>
+            <label for="website-new-name">Name</label>
             <input class="form-control"
+                   placeholder="name"
                    type="text"
-                   placeholder="page name"
-                   id="page-edit-name"
-                   value="Blog Post"/>
+                   id="website-new-name"/>
 
-            <label for="page-edit-title">Title</label>
-            <input id="page-edit-title"
-                   type="text"
-                   placeholder="page title"
-                   class="form-control"
-                   value="Some Title"/>
-
-            <a href="page-list.html" class="btn btn-block btn-danger">Delete</a>
+            <label for="website-new-description">Description</label>
+            <textarea id="website-new-description"
+                      rows="5"
+                      placeholder="description"
+                      class="form-control"></textarea>
         </div>
     </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom nav2">
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.html"
+                <a href="#!/user/:uid"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
@@ -142,6 +119,3 @@
         </div>
     </div>
 </nav>
-
-</body>
-</html>

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-4 hidden-xs">
                     <p class="navbar-text pull-left">
-                        <a href="#!/user/:uid/website/:wid/page"
+                        <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -15,7 +15,7 @@
                     </a>
 
                     <p class="navbar-text pull-right">
-                        <a href="#!/user/:uid/website/:wid/page/new"
+                        <a ng-click="model.clearForm(model.page)"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
@@ -25,7 +25,7 @@
                 <div class="col-sm-6">
                     <div class="visible-xs">
                         <p class="navbar-text pull-left">
-                            <a href="#!/user/:uid/website/:wid/page"
+                            <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page"
                                class="navbar-link">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                             </a>
@@ -38,7 +38,7 @@
                 </div>
 
                 <p class="navbar-text pull-right">
-                    <a href="#!/user/:uid/website/:wid/page"
+                    <a ng-click="model.createPage(model.page)"
                        class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
@@ -52,47 +52,12 @@
     <div class="row">
         <div class="col-xs-4 hidden-xs">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="#!/user/:uid/website/:wid/page/:pid/widget">
-                        Blog Post
+                <li ng-repeat="page in model.pages"
+                    class="list-group-item">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}/widget">
+                        {{page.name}}
                     </a>
-                    <a href="#!/user/:uid/website/:wid/page/:pid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#!/user/:uid/website/:wid/page/:pid/widget">
-                        Blogs
-                    </a>
-                    <a href="#!/user/:uid/website/:wid/page/:pid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#!/user/:uid/website/:wid/page/:pid/widget">
-                        Home
-                    </a>
-                    <a href="#!/user/:uid/website/:wid/page/:pid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#!/user/:uid/website/:wid/page/:pid/widget">
-                        About
-                    </a>
-                    <a href="#!/user/:uid/website/:wid/page/:pid">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#!/user/:uid/website/:wid/page/:pid/widget">
-                        Contact Us
-                    </a>
-                    <a href="#!/user/:uid/website/:wid/page/:pid">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
@@ -100,14 +65,20 @@
         </div>
 
         <div class="col-sm-8">
+            <div ng-show="model.message" class="alert alert-info">
+                {{model.message}}
+            </div>
+
             <label for="page-new-name">Name</label>
-            <input class="form-control"
+            <input ng-model="model.page.name"
+                   class="form-control"
                    placeholder="page name"
                    type="text"
                    id="page-new-name"/>
 
             <label for="page-new-title">Title</label>
-            <input id="page-new-title"
+            <input ng-model="model.page.description"
+                   id="page-new-title"
                    placeholder="page title"
                    type="text"
                    class="form-control"/>
@@ -119,7 +90,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#!/user/:uid"
+                <a href="#!/user/{{model.uid}}"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>

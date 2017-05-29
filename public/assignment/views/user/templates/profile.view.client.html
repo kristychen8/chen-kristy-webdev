@@ -5,8 +5,8 @@
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a href="#!/user/:uid"
-                   class="navbar-link">
+                <a class="navbar-link"
+                   ng-click="model.profileUpdate(model.user)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -15,10 +15,15 @@
 </nav>
 
 <div class="container-fluid">
+    <div ng-show="model.message" class="alert alert-info">
+        {{model.message}}
+    </div>
+
     <form>
         <div class="form-group">
             <label for="profile-username">Username</label>
-            <input type="text"
+            <input ng-model="model.user.username"
+                   type="text"
                    class="form-control"
                    id="profile-username"
                    readonly value="alice">
@@ -26,7 +31,8 @@
 
         <div class="form-group">
             <label for="profile-email">Email Address</label>
-            <input type="email"
+            <input ng-model="model.user.email"
+                   type="email"
                    class="form-control"
                    id="profile-email"
                    placeholder="email address"
@@ -35,7 +41,8 @@
 
         <div class="form-group">
             <label for="profile-first-name">First Name</label>
-            <input type="text"
+            <input ng-model="model.user.firstName"
+                   type="text"
                    class="form-control"
                    id="profile-first-name"
                    placeholder="first name"
@@ -44,7 +51,8 @@
 
         <div class="form-group">
             <label for="profile-last-name">Last Name</label>
-            <input type="text"
+            <input ng-model="model.user.lastName"
+                   type="text"
                    class="form-control"
                    id="profile-last-name"
                    placeholder="last name"
@@ -53,7 +61,7 @@
     </form>
 
     <a class="btn btn-primary btn-block"
-       href="#!/user/:uid/website">Websites</a>
+       href="#!/user/{{model.user._id}}/website">Websites</a>
 
     <a class="btn btn-danger btn-block"
        href="#!/login">Logout</a>
@@ -62,7 +70,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <p class="navbar-text pull-right">
-            <a href="#!/user/:uid"
+            <a ng-click="model.toProfile()"
                class="navbar-link">
                 <span class="glyphicon glyphicon-user pull-right"></span>
             </a>

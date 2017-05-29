@@ -1,64 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top nav2">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a href="#!/user/:uid/website/:wid/page/:pid/widget"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </p>
-
-            <a class="navbar-brand">
-                Widget Edit
-            </a>
-
-            <p class="navbar-text pull-right">
-                <a href="#!/user/:uid/website/:wid/page/:pid/widget"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <label for="widget-heading-name">Name</label>
-    <input class="form-control"
-           placeholder="name"
-           type="text"
-           id="widget-heading-name"/>
-
-    <label for="widget-heading-text">Text</label>
-    <input class="form-control"
-           placeholder="text"
-           type="text"
-           value="Computer Science Meme"
-           id="widget-heading-text"/>
-
-    <label for="widget-heading-size">Size</label>
-    <select id="widget-heading-size"
-            class="form-control">
-        <option>1 (X-Large)</option>
-        <option>2 (Larger)</option>
-        <option>3 (Large)</option>
-        <option>4 (Medium)</option>
-        <option>5 (Small)</option>
-        <option>6 (Smallest)</option>
-    </select>
-
-    <a href="#!/user/:uid/website/:wid/page/:pid/widget" class="btn btn-block btn-danger">Delete</a>
+<div ng-switch="widget.size">
+    <h1 ng-switch-when="1">{{widget.text}}</h1>
+    <h2 ng-switch-when="2">{{widget.text}}</h2>
+    <h3 ng-switch-when="3">{{widget.text}}</h3>
+    <h4 ng-switch-when="4">{{widget.text}}</h4>
+    <h5 ng-switch-when="5">{{widget.text}}</h5>
+    <h6 ng-switch-when="6">{{widget.text}}</h6>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom nav2">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-right">
-                <a href="#!/user/:uid"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>

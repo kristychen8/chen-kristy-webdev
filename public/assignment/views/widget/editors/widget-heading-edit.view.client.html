@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default navbar-fixed-top nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand">
+                Widget Edit
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget()"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <label for="widget-heading-name">Name</label>
+    <input ng-model="model.widget.name"
+           class="form-control"
+           placeholder="name"
+           type="text"
+           id="widget-heading-name"/>
+
+    <label for="widget-heading-text">Text</label>
+    <input ng-model="model.widget.text"
+           class="form-control"
+           placeholder="text"
+           type="text"
+           id="widget-heading-text"/>
+
+    <label for="widget-heading-size">Size</label>
+    <select id="widget-heading-size"
+            class="form-control"
+            ng-model="model.widget.size">
+        <option ng-value="1">1</option>
+        <option ng-value="2">2</option>
+        <option ng-value="3">3</option>
+        <option ng-value="4">4</option>
+        <option ng-value="5">5</option>
+        <option ng-value="6">6</option>
+    </select>
+
+    <a ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="#!/user/{{model.uid}}"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

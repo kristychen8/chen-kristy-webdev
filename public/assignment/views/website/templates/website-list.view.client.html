@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/user/:uid"
+                <a href="#!/user/{{model.uid}}"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
@@ -13,7 +13,7 @@
             </a>
 
             <p class="navbar-text pull-right">
-                <a href="#!/user/:uid/website/new"
+                <a href="#!/user/{{model.uid}}/website/new"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
@@ -24,38 +24,12 @@
 
 <div class="container-fluid">
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="#!/user/:uid/website/:wid/page">
-                Address Book App
+        <li ng-repeat="website in model.websites"
+            class="list-group-item">
+            <a href="#!/user/{{model.uid}}/website/{{website._id}}/page">
+                {{website.name}}
             </a>
-            <a href="#!/user/:uid/website/:wid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#!/user/:uid/website/:wid/page">
-                Blogger
-            </a>
-            <a href="#!/user/:uid/website/:wid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#!/user/:uid/website/:wid/page">
-                Blogging App
-            </a>
-            <a href="#!/user/:uid/website/:wid">
-                <span class="glyphicon glyphicon-cog pull-right"></span>
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#!/user/:uid/website/:wid/page">
-                Script Testing App
-            </a>
-            <a href="#!/user/:uid/website/:wid">
+            <a href="#!/user/{{model.uid}}/website/{{website._id}}">
                 <span class="glyphicon glyphicon-cog pull-right"></span>
             </a>
         </li>
@@ -66,7 +40,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#!/user/:uid"
+                <a href="#!/user/{{model.uid}}"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>

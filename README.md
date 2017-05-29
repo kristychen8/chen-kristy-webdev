@@ -13,4 +13,4 @@ You can find more about me and my projects [here](http://kristychen8.github.io).
 2. link to project
     * TBD
 3. link to assignment
-    * TBD
+    * https://chen-kristy-webdev.herokuapp.com/assignment/index.html

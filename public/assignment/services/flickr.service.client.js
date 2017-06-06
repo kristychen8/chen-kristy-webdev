@@ -7,8 +7,11 @@
 
         this.searchPhotos = searchPhotos;
 
-        var key = config.FLICKR_KEY;
-        var secret = config.FLICKR_SECRET_KEY;
+        // var key = config.FLICKR_KEY;
+        // var secret = config.FLICKR_SECRET_KEY;
+
+        var key = process.env.FLICKR_KEY;
+        var secret = process.env.FLICKR_SECRET_KEY;
         var urlBase = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT";
 
         function searchPhotos(searchTerm) {

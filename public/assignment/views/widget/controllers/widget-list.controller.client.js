@@ -14,10 +14,11 @@
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.getWidgetUrlForType = getWidgetUrlForType;
 
-        function init() {
-            model.widgets = WidgetService.findWidgetsByPageId(model.pid);
-        }
-        init();
+        WidgetService
+            .findWidgetsByPageId(model.pid)
+            .then(function(widgets) {
+                model.widgets = widgets;
+            });
 
         function trustThisContent(html) {
             return $sce.trustAsHtml(html);

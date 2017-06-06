@@ -1,9 +1,9 @@
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function  RegisterController ($location, UserService) {
+    function RegisterController($location, UserService) {
         var model = this;
 
         // event handlers
@@ -12,23 +12,29 @@
         //implementations
         function register(user, password2) {
 
-            if(user.password !== password2) {
+            if (user.password !== password2) {
                 model.alert = "Passwords must match";
                 return;
             }
 
-            var found = UserService.findUserByUsername(user.username);
-
-            if(found) {
-                model.alert = "Username is not available";
-            } else {
-                var u = {
-                    username: user.username,
-                    password: user.password
-                };
-                UserService.createUser(u);
-                $location.url('/user/' + u._id);
-            }
+            UserService
+                .findUserByUsername(user.username)
+                .then(
+                    function () {
+                        model.alert = "Username is not available";
+                    },
+                    function () {
+                        var u = {
+                            username: user.username,
+                            password: user.password
+                        };
+                        return UserService
+                            .createUser(u)
+                            .then(function (user) {
+                                $location.url('/user/' + user._id);
+                            });
+                    }
+                )
         }
     }
 })();

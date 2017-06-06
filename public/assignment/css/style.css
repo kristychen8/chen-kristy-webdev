@@ -60,3 +60,7 @@ a:hover {
     border-bottom-left-radius: 10px;
     opacity: 0.8;
 }
+
+.btn {
+    margin-bottom: 5px;
+}

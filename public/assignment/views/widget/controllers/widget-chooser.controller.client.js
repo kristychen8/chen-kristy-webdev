@@ -11,14 +11,10 @@
 
         model.createWidget = createWidget;
 
-        function init() {
-            model.widgets = WidgetService.findWidgetsByPageId(model.pid);
-        }
-        init();
-
         function createWidget(string) {
             var widget = {
-                widgetType: string,
+                _id : (new Date()).getTime() + "",
+            widgetType: string,
                 name: 'New Name',
                 text: 'New Text'
             };
@@ -33,8 +29,11 @@
                 widget.url = 'http://lorempixel.com/400/200/';
                 widget.width = '100%';
             }
-            WidgetService.createWidget(model.pid, widget);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id);
+            WidgetService
+                .createWidget(model.pid, widget)
+                .then(function() {
+                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id);
+                });
         }
     }
 })();

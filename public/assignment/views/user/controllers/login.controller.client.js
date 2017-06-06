@@ -15,11 +15,18 @@
              if (user === undefined) {
                  model.alert = "Input login info";
              } else {
-                 user = UserService.findUserByCredentials(user.username, user.password);
-                 if(user) {
-                     $location.url('/user/' + user._id);
-                 } else {
+                 UserService
+                     .findUserByCredentials(user.username, user.password)
+                     .then(login, handleError);
+
+                 function handleError(error) {
                      model.alert = "Unable to login: incorrect username or password";
+                 }
+
+                 function login(user) {
+                     if(user) {
+                         $location.url('/user/' + user._id);
+                     }
                  }
              }
 

@@ -11,11 +11,9 @@
         model.createPage = createPage;
         model.clearForm = clearForm;
 
-        function init() {
-            model.pages = PageService.findPageByWebsiteId(model.wid);
-        }
-
-        init();
+        PageService
+            .findPageByWebsiteId(model.wid)
+            .then(renderPages);
 
         function createPage(newPage) {
             if (newPage === undefined) {
@@ -29,17 +27,24 @@
                     name: newPage.name,
                     description: newPage.description
                 };
-                PageService.createPage(model.wid, page);
-                $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+                PageService
+                    .createPage(model.wid, page)
+                    .then(function() {
+                        $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+                    });
             }
         }
 
         function clearForm(p) {
-            if (p != undefined) {
+            if (p !== undefined) {
                 p.name = undefined;
                 p.description = undefined;
                 model.message = null;
             }
+        }
+
+        function renderPages(pages) {
+            model.pages = pages;
         }
     }
 })();

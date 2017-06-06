@@ -9,27 +9,35 @@
         model.wid = $routeParams['wid'];
         model.pid = $routeParams['pid'];
         model.widgetId = $routeParams['wgid'];
-        var w = {};
 
         model.deleteWidget = deleteWidget;
         model.updateWidget = updateWidget;
 
-        function init() {
-            model.widgets = WidgetService.findWidgetsByPageId(model.pid);
-            model.widget = {};
-            w = WidgetService.findWidgetById(model.widgetId);
-            angular.copy(w, model.widget);
-        }
-        init();
+        WidgetService
+            .findWidgetsByPageId(model.pid)
+            .then(function (widgets) {
+                model.widgets = widgets;
+            });
+        WidgetService
+            .findWidgetById(model.widgetId)
+            .then(function (widget) {
+                model.widget = widget;
+            });
 
         function deleteWidget() {
-            WidgetService.deleteWidget(model.widgetId);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
+            WidgetService
+                .deleteWidget(model.widgetId)
+                .then(function () {
+                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
+                });
         }
 
         function updateWidget() {
-            WidgetService.updateWidget(model.widgetId, model.widget);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
+            WidgetService
+                .updateWidget(model.widgetId, model.widget)
+                .then(function () {
+                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
+                });
         }
     }
 })();

@@ -10,11 +10,10 @@
         model.createWebsite = createWebsite;
         model.clearForm = clearForm;
 
-        function init() {
-            model.websites = WebsiteService.findWebsitesByUser(model.uid);
-        }
+        WebsiteService
+            .findWebsitesByUser(model.uid)
+            .then(renderWebsites);
 
-        init();
 
         function createWebsite(newWeb) {
             if (newWeb === undefined) {
@@ -28,17 +27,24 @@
                     name: newWeb.name,
                     description: newWeb.description
                 };
-                WebsiteService.createWebsite(model.uid, website);
-                $location.url('/user/' + model.uid + '/website');
+                WebsiteService
+                    .createWebsite(model.uid, website)
+                    .then(function() {
+                        $location.url('/user/' + model.uid + '/website');
+                    });
             }
         }
 
         function clearForm(web) {
-            if (web != undefined) {
+            if (web !== undefined) {
                 web.name = undefined;
                 web.description = undefined;
                 model.message = null;
             }
+        }
+
+        function renderWebsites (websites) {
+            model.websites = websites;
         }
     }
 })();

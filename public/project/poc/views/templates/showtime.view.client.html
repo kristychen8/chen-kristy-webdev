@@ -1,0 +1,47 @@
+<nav class="navbar navbar-default navbar-fixed-top nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/poc/theater"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand">
+                List of Movie Showtimes
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/poc">
+                    Go Back To Home
+                </a>
+            </p>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="showtime in model.showtimes"
+                class="list-group-item">
+                <h3>{{showtime.title}}</h3>
+                <p>Short Description: {{showtime.shortDescription}}</p>
+                <p>Run Time: {{showtime.runTime}}</p>
+                <p>Showtimes:</p>
+                <ul class="list-group">
+                    <li ng-repeat="time in showtime.showtimes"
+                        class="list-group-item">
+                        {{time.dateTime}}
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom nav2">
+</nav>

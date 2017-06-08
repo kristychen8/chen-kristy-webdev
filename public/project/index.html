@@ -1,10 +1,43 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Project Home Page</title>-->
+<!--</head>-->
+<!--<body>-->
+    <!--<h1>Project Home Page</h1>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="MovieTag">
 <head>
     <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!-- Proof of Concept (POC) -->
+    <script src="poc/views/controllers/detail.controller.client.js"></script>
+    <script src="poc/views/controllers/search.controller.client.js"></script>
+    <script src="poc/views/controllers/local-theater-movies.controller.client.js"></script>
+    <script src="poc/views/controllers/showtime.controller.client.js"></script>
+    <script src="poc/services/poc.service.client.js"></script>
+
+
+
 </head>
 <body>
-    <h1>Project Home Page</h1>
+
+<div ng-view></div>
+
 </body>
 </html>

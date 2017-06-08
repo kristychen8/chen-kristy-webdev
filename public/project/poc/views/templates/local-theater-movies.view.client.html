@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/poc"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand">
+                Search a Theater's Showtimes
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-show="model.alert" class="alert alert-danger">
+        {{model.alert}}
+    </div>
+
+    <div class="input-group">
+        <input ng-model="zipcode"
+               type="text"
+               class="form-control"
+               placeholder="zipcode">
+        <span class="input-group-btn">
+            <a ng-click="model.searchTheater(zipcode)"
+               class="btn btn-default"
+               type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </a>
+        </span>
+    </div>
+
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="theater in model.theaters"
+                class="list-group-item">
+                <a href="#!/poc/theater/{{theater.theatreId}}">
+                    <h4>{{theater.name}}</h4>
+                </a>
+                <p>Location: {{theater.location.address.street}}, {{theater.location.address.city}}</p>
+                <p>Telephone: {{theater.location.telephone}}</p>
+                <p>Distance: {{theater.location.distance}}</p>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+</nav>

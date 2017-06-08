@@ -25,14 +25,14 @@
         }
 
         function searchTheaters(zipcode) {
-            var urlBase = "http://data.tmsapi.com/v1.1/theatres?zip=ZIP_CODE&api_key=h7krhy5w6qupm59p7phqvsaa";
+            var urlBase = "https://data.tmsapi.com/v1.1/theatres?zip=ZIP_CODE&api_key=h7krhy5w6qupm59p7phqvsaa";
             var url = urlBase
                 .replace("ZIP_CODE", zipcode);
             return $http.get(url);
         }
 
         function searchShowtimes(theaterID, startDate) {
-            var urlBase = "            http://data.tmsapi.com/v1.1/theatres/TID/showings?startDate=START_DATE&numDays=8&api_key=h7krhy5w6qupm59p7phqvsaa";
+            var urlBase = "https://data.tmsapi.com/v1.1/theatres/TID/showings?startDate=START_DATE&numDays=8&api_key=h7krhy5w6qupm59p7phqvsaa";
             var url = urlBase
                 .replace("START_DATE", startDate)
                 .replace("TID", theaterID);

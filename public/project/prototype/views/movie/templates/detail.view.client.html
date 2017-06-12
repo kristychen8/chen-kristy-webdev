@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default navbar-fixed-top nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/prototype/user/{{model.uid}}/search"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <p class="navbar-text pull-right">
+                <a ng-click="model.bookmark()">
+                    Bookmark
+                </a>
+            </p>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div ng-show="model.alert" class="alert alert-info">
+        {{model.alert}}
+    </div>
+
+    <h1> {{model.detail.title}} </h1>
+    <div class="detail">
+        <h4> {{model.detail.overview}} </h4>
+        <p> Release Date: {{model.detail.release_date}} </p>
+        <p> Run Time: {{model.detail.runtime}} minutes </p>
+        <p> Status: {{model.detail.status}} </p>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom nav2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+    <p class="navbar-text pull-right">
+        <a href="#!/prototype/user/{{model.uid}}"
+           class="navbar-link">
+            <span class="glyphicon glyphicon-user"></span>
+        </a>
+    </p>
+        </div>
+    </div>
+</nav>

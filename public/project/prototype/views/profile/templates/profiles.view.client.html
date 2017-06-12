@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/prototype/user/{{model.uid}}"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand">
+                All Users
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="user in model.users"
+                class="list-group-item">
+                <a href="#!/prototype/user/{{model.uid}}/profile/{{user._id}}">
+                    {{user.username}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+</nav>

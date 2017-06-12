@@ -1,0 +1,122 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/prototype/user/{{model.uid}}/profile"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a></p>
+            <a class="navbar-brand">
+                {{model.user.username}}'s profile
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a ng-click="model.follow()">
+                    Follow
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-show="model.alert" class="alert alert-info">
+        {{model.alert}}
+    </div>
+
+
+    <form>
+        <div class="form-group">
+            <label for="profile-username">Username</label>
+            <input ng-model="model.user.username"
+                   type="text"
+                   class="form-control"
+                   id="profile-username"
+                   readonly value="alice">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-email">Email Address</label>
+            <input ng-model="model.user.email"
+                   type="email"
+                   class="form-control"
+                   id="profile-email"
+                   placeholder="email address"
+                   value="alice@wonderland.com">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-first-name">First Name</label>
+            <input ng-model="model.user.firstName"
+                   type="text"
+                   class="form-control"
+                   id="profile-first-name"
+                   placeholder="first name"
+                   value="Alice">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-last-name">Last Name</label>
+            <input ng-model="model.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="profile-last-name"
+                   placeholder="last name"
+                   value="Wonderland">
+        </div>
+    </form>
+
+    <p>
+        FOLLOWERS:
+    </p>
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="follower in model.user.followers"
+                class="list-group-item">
+                {{follower.username}}
+        </ul>
+        </li>
+    </div>
+
+    <p>
+        FOLLOWING:
+    </p>
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="follow in model.user.followed"
+                class="list-group-item">
+                <a href="#!/prototype/user/{{model.uid}}/profile/{{follow.id}}">
+                    {{follow.username}}
+                </a>
+        </ul>
+        </li>
+    </div>
+
+    <p>
+        BOOKMARKS:
+    </p>
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="bookmark in model.user.bookmark"
+                class="list-group-item">
+                <a href="#!/prototype/user/{{model.uid}}/search/{{bookmark.id}}">
+                    {{bookmark.name}}
+                </a>
+        </ul>
+        </li>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="#!/prototype/user/{{model.uid}}"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

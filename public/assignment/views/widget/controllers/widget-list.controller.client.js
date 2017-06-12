@@ -30,12 +30,11 @@
             var id = youTubeLinkParts[youTubeLinkParts.length - 1];
             embedUrl += id;
             embedUrl= embedUrl.replace('watch?v=','');
-            console.log(embedUrl);
             return $sce.trustAsResourceUrl(embedUrl);
         }
 
         function getWidgetUrlForType(type) {
-            return 'views/widget/templates/widget-' + type.toLowerCase() + '.view.client.html';
+            return 'views/widget/templates/widget-' + type + '.view.client.html';
         }
     }
 })();

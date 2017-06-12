@@ -13,7 +13,6 @@
 
         function createWidget(string) {
             var widget = {
-                _id : (new Date()).getTime() + "",
             widgetType: string,
                 name: 'New Name',
                 text: 'New Text'
@@ -29,10 +28,13 @@
                 widget.url = 'http://lorempixel.com/400/200/';
                 widget.width = '100%';
             }
+            else if (string === 'TEXT') {
+                widget.placeholder = "placeholder"
+            }
             WidgetService
                 .createWidget(model.pid, widget)
-                .then(function() {
-                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id);
+                .then(function(w) {
+                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + w._id);
                 });
         }
     }

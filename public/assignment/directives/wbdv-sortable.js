@@ -12,6 +12,7 @@
                 $(element).sortable({
                     axis: 'y',
                     cursor: 'move',
+                    tolerance: 'touch',
                     start: function (event, ui) {
                         initial = ui.item.index();
                     },

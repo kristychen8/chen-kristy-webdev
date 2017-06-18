@@ -3,9 +3,9 @@
         .module("WebAppMaker")
         .controller("EditPageController", EditPageController);
 
-    function EditPageController($location, $routeParams, PageService) {
+    function EditPageController(currentUser, $location, $routeParams, PageService, $scope) {
         var model = this;
-        model.uid = $routeParams['uid'];
+        model.uid = currentUser._id;
         model.wid = $routeParams['wid'];
         model.pageId = $routeParams['pid'];
 
@@ -24,13 +24,14 @@
             });
 
         function updatePage() {
-            if (model.page.name === "" || model.page.description === "") {
-                model.message = "Must have name and description";
+            $scope.pagepage.submitted = true;
+            if (model.page.name === "" || model.page.name === undefined) {
+                model.message = "Must have name";
             } else {
                 PageService
                     .updatePage(model.pageId, model.page)
                     .then(function() {
-                        $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+                        $location.url('/website/' + model.wid + '/page');
                     });
             }
         }
@@ -39,7 +40,7 @@
             PageService
                 .deletePage(model.pageId)
                 .then(function() {
-                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+                    $location.url('/website/' + model.wid + '/page');
                 });
         }
 

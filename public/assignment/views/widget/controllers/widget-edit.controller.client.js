@@ -3,9 +3,9 @@
         .module("WebAppMaker")
         .controller("EditWidgetController", EditWidgetController);
 
-    function EditWidgetController($location, $routeParams, WidgetService) {
+    function EditWidgetController(currentUser, $location, $routeParams, WidgetService, $scope) {
         var model = this;
-        model.uid = $routeParams['uid'];
+        model.uid = currentUser._id;
         model.wid = $routeParams['wid'];
         model.pid = $routeParams['pid'];
         model.widgetId = $routeParams['wgid'];
@@ -28,16 +28,25 @@
             WidgetService
                 .deleteWidget(model.widgetId)
                 .then(function () {
-                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
+                    $location.url('/website/' + model.wid + '/page/' + model.pid + '/widget');
                 });
         }
 
         function updateWidget() {
-            WidgetService
-                .updateWidget(model.widgetId, model.widget)
-                .then(function () {
-                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget');
-                });
+            $scope.widgetpage.submitted = true;
+            if (model.widget.name === undefined) {
+                model.message = "Must have name";
+            }
+            else if (model.widget.name === undefined || model.widget.name === "") {
+                model.message = "Must have name";
+            }
+            else {
+                WidgetService
+                    .updateWidget(model.widgetId, model.widget)
+                    .then(function () {
+                        $location.url('/website/' + model.wid + '/page/' + model.pid + '/widget');
+                    });
+            }
         }
     }
 })();

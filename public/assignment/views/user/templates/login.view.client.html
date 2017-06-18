@@ -5,23 +5,44 @@
         {{model.alert}}
     </div>
 
-    <label for="username">Username</label>
+    <form name="loginpage" ng-class="{submitted:loginpage.submitted}">
+
+        <div class="form-group" ng-class="{ 'has-error' : loginpage.submitted && loginpage.username.$error.required}">
+        <label for="username">Username</label>
     <input ng-model="model.user.username"
+           autocorrect = "off"
+           autocapitalize = "off"
+           autocomplete="off"
+           spellcheck="false"
            type="text"
            id="username"
            class="form-control"
-           placeholder="username"/>
+           name="username"
+           placeholder="username" required/>
+        <p class="help-block" ng-show="loginpage.submitted && loginpage.username.$error.required ">Username is required</p>
+    </div>
 
-    <label for="password">Password</label>
+        <div class="form-group" ng-class="{ 'has-error' : loginpage.submitted && loginpage.password.$error.required}">
+        <label for="password">Password</label>
     <input ng-model="model.user.password"
+           name="password"
            type="password"
            id="password"
            class="form-control"
-           placeholder="password"/>
+           placeholder="password" required/>
+        <p class="help-block" ng-show="loginpage.submitted && loginpage.password.$error.required ">Password is required</p>
+        </div>
 
     <a class="btn btn-primary btn-block"
        ng-click="model.login(model.user)">Login</a>
 
+    <a href="/auth/facebook" class="btn btn-primary btn-block">
+        <span class="fa fa-facebook-official"></span>
+        Facebook
+    </a>
+
     <a class="btn btn-success btn-block"
        href="#!/register">Register</a>
+    </form>
+
 </div>

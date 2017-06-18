@@ -3,9 +3,9 @@
         .module("WebAppMaker")
         .controller("EditWebsiteController", EditWebsiteController);
 
-    function  EditWebsiteController ($location, $routeParams, WebsiteService) {
+    function  EditWebsiteController (currentUser, $location, $routeParams, WebsiteService, $scope) {
         var model = this;
-        model.uid = $routeParams['uid'];
+        model.uid = currentUser._id;
         model.websiteId = $routeParams['wid'];
 
         model.updateWebsite = updateWebsite;
@@ -24,13 +24,14 @@
 
 
         function updateWebsite() {
-            if (model.website.name === "" || model.website.description === "") {
-                model.message = "Must have name and description";
+            $scope.websitepage.submitted = true;
+            if (model.website.name === "" || model.website.name === undefined) {
+                model.message = "Must have name";
             } else {
                 WebsiteService
                     .updateWebsite(model.websiteId, model.website)
                     .then(function() {
-                        $location.url('/user/'+ model.uid +'/website');
+                        $location.url('/website');
                     });
             }
         }
@@ -39,7 +40,7 @@
             WebsiteService
                 .deleteWebsite(model.websiteId)
                 .then(function() {
-                    $location.url('/user/'+ model.uid +'/website');
+                    $location.url('/website');
                 });
         }
 

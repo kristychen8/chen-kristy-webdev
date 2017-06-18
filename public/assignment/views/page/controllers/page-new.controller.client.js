@@ -3,9 +3,9 @@
         .module("WebAppMaker")
         .controller("NewPageController", NewPageController);
 
-    function NewPageController($location, $routeParams, PageService) {
+    function NewPageController(currentUser, $location, $routeParams, PageService, $scope) {
         var model = this;
-        model.uid = $routeParams['uid'];
+        model.uid = currentUser._id;
         model.wid = $routeParams['wid'];
 
         model.createPage = createPage;
@@ -16,11 +16,12 @@
             .then(renderPages);
 
         function createPage(newPage) {
+            $scope.pagepage.submitted = true;
             if (newPage === undefined) {
-                model.message = "Must have name and title";
+                model.message = "Must have name";
             }
-            else if ((newPage.name === undefined || newPage.name === "") || (newPage.description === undefined || newPage.description === "")) {
-                model.message = "Must have name and title";
+            else if (newPage.name === undefined || newPage.name === "") {
+                model.message = "Must have name";
             }
             else {
                 var page = {
@@ -30,16 +31,17 @@
                 PageService
                     .createPage(model.wid, page)
                     .then(function() {
-                        $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+                        $location.url('/website/' + model.wid + '/page');
                     });
             }
         }
 
         function clearForm(p) {
+            $scope.pagepage.submitted = false;
+            model.message = null;
             if (p !== undefined) {
                 p.name = undefined;
                 p.description = undefined;
-                model.message = null;
             }
         }
 

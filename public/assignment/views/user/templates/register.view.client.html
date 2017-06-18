@@ -5,30 +5,47 @@
         {{model.alert}}
     </div>
 
-    <label for="register-username">Username</label>
+    <form name="profilepage" ng-class="{submitted:profilepage.submitted}">
+
+        <div class="form-group" ng-class="{ 'has-error' : profilepage.submitted && profilepage.username.$error.required}">
+            <label for="register-username">Username</label>
     <input ng-model="model.user.username"
            type="text"
+           name="username"
            id="register-username"
            class="form-control"
-           placeholder="username"/>
+           placeholder="username" required/>
+            <p class="help-block" ng-show="profilepage.submitted && profilepage.username.$error.required ">Username is required</p>
+        </div>
 
-    <label for="register-password">Password</label>
+        <div class="form-group" ng-class="{ 'has-error' : profilepage.submitted && profilepage.password.$error.required}">
+        <label for="register-password">Password</label>
     <input ng-model="model.user.password"
            type="password"
            id="register-password"
            class="form-control"
-           placeholder="password"/>
+           name="password"
+           placeholder="password" required/>
+            <p class="help-block" ng-show="profilepage.submitted && profilepage.password.$error.required ">Password is required</p>
+        </div>
 
-    <label for="register-verify-pwd">Verify Password</label>
+        <div class="form-group" ng-class="{ 'has-error' : profilepage.submitted && profilepage.verifypwd.$error.required || profilepage.verifypwd.$error.pattern}">
+        <label for="register-verify-pwd">Verify Password</label>
     <input ng-model="password2"
            type="password"
            id="register-verify-pwd"
            class="form-control"
-           placeholder="verify password"/>
+           name="verifypwd"
+           ng-pattern="model.user.password"
+           placeholder="verify password" required/>
+            <p class="help-block" ng-show="profilepage.submitted && profilepage.verifypwd.$error.pattern">Passwords do not match</p>
+            <p class="help-block" ng-show="profilepage.submitted && profilepage.verifypwd.$error.required ">Verify Password is required</p>
+        </div>
 
     <a class="btn btn-primary btn-block"
        ng-click="model.register(model.user, password2)">Register</a>
 
     <a class="btn btn-danger btn-block"
        href="#!/login">Cancel</a>
+    </form>
 </div>

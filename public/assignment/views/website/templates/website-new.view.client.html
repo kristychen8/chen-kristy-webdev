@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-4 hidden-xs">
                     <p class="navbar-text pull-left">
-                        <a href="#!/user/{{model.uid}}/website"
+                        <a href="#!/website"
                            class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -25,7 +25,7 @@
                 <div class="col-sm-6">
                     <div class="visible-xs">
                         <p class="navbar-text pull-left">
-                            <a href="#!/user/{{model.uid}}/website"
+                            <a href="#!/website"
                                class="navbar-link">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                             </a>
@@ -55,10 +55,10 @@
             <ul class="list-group">
                 <li ng-repeat="website in model.websites"
                     class="list-group-item">
-                    <a href="#!/user/{{model.uid}}/website/{{website._id}}/page">
+                    <a href="#!/website/{{website._id}}/page">
                         {{website.name}}
                     </a>
-                    <a href="#!/user/{{model.uid}}/website/{{website._id}}">
+                    <a href="#!/website/{{website._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
@@ -66,23 +66,30 @@
         </div>
 
         <div class="col-sm-8">
-            <div ng-show="model.message" class="alert alert-info">
+            <div ng-show="model.message" class="alert alert-danger">
                 {{model.message}}
             </div>
 
-            <label for="website-new-name">Name</label>
+            <form name="websitepage" ng-class="{submitted:websitepage.submitted}">
+                <div class="form-group" ng-class="{ 'has-error' : websitepage.submitted && websitepage.name.$error.required}">
+                <label for="website-new-name">Name</label>
             <input ng-model="model.website.name"
                    class="form-control"
                    placeholder="name"
+                   name="name"
                    type="text"
-                   id="website-new-name"/>
+                   id="website-new-name" required/>
+                    <p class="help-block" ng-show="websitepage.submitted && websitepage.name.$error.required ">Name is required</p>
+                </div>
 
-            <label for="website-new-description">Description</label>
+                <label for="website-new-description">Description</label>
             <textarea ng-model="model.website.description"
                       id="website-new-description"
                       rows="5"
                       placeholder="description"
                       class="form-control"></textarea>
+
+            </form>
         </div>
     </div>
 </div>
@@ -92,7 +99,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.uid}}"
+                <a href="#!/profile"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>

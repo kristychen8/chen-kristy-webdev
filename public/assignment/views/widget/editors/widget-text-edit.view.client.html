@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
+                <a href="#!/website/{{model.wid}}/page/{{model.pid}}/widget"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
@@ -23,8 +23,17 @@
 </nav>
 
 <div class="container-fluid">
+    <div ng-show="model.message" class="alert alert-danger">
+        {{model.message}}
+    </div>
+
+    <div class="form-group"
+         ng-class="{ 'has-error' : widgetpage.submitted && widgetpage.name.$error.required}">
     <label for="widget-text-name">Name</label>
-    <input ng-model="model.widget.name" class="form-control" id="widget-text-name" placeholder="name"/>
+    <input ng-model="model.widget.name" class="form-control" id="widget-text-name" placeholder="name" name="name" required/>
+        <p class="help-block" ng-show="widgetpage.submitted && widgetpage.name.$error.required">Name is
+            required</p>
+    </div>
     <label for="widget-text-text">Text</label>
     <input ng-model="model.widget.text" class="form-control" id="widget-text-text" placeholder="text"/>
     <label for="widget-text-rows">Rows</label>
@@ -44,7 +53,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.uid}}"
+                <a href="#!/profile"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>

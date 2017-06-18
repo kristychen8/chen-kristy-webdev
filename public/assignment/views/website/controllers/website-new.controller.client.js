@@ -3,9 +3,9 @@
         .module("WebAppMaker")
         .controller("NewWebsiteController", NewWebsiteController);
 
-    function NewWebsiteController($location, $routeParams, WebsiteService) {
+    function NewWebsiteController(currentUser, $location, WebsiteService, $scope) {
         var model = this;
-        model.uid = $routeParams['uid'];
+        model.uid = currentUser._id;
 
         model.createWebsite = createWebsite;
         model.clearForm = clearForm;
@@ -16,11 +16,12 @@
 
 
         function createWebsite(newWeb) {
+            $scope.websitepage.submitted = true;
             if (newWeb === undefined) {
-                model.message = "Must have name and description";
+                model.message = "Must have name";
             }
-            else if ((newWeb.name === undefined || newWeb.name === "") || (newWeb.description === undefined || newWeb.description === "")) {
-                model.message = "Must have name and description";
+            else if (newWeb.name === undefined || newWeb.name === "") {
+                model.message = "Must have name";
             }
             else {
                 var website = {
@@ -30,17 +31,19 @@
                 WebsiteService
                     .createWebsite(model.uid, website)
                     .then(function() {
-                        $location.url('/user/' + model.uid + '/website');
+                        $location.url('/website');
                     });
             }
         }
 
         function clearForm(web) {
+            $scope.websitepage.submitted = false;
+            model.message = null;
             if (web !== undefined) {
                 web.name = undefined;
                 web.description = undefined;
-                model.message = null;
             }
+            // web = undefined;
         }
 
         function renderWebsites (websites) {

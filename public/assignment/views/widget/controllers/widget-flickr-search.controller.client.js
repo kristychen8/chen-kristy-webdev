@@ -3,11 +3,11 @@
         .module('WebAppMaker')
         .controller('FlickrImageSearchController', FlickrImageSearchController);
 
-    function FlickrImageSearchController (FlickrService, WidgetService, $location, $routeParams) {
+    function FlickrImageSearchController (currentUser, FlickrService, WidgetService, $location, $routeParams) {
         var model = this;
 
         model.pageId = $routeParams.pid;
-        model.userId = $routeParams.uid;
+        model.userId = currentUser._id;
         model.websiteId = $routeParams.wid;
         model.widgetId = $routeParams.wgid;
 
@@ -25,7 +25,7 @@
                     WidgetService
                         .updateWidget(model.widgetId, widget)
                         .then(function () {
-                            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget/" + model.widgetId);
+                            $location.url("/website/" + model.websiteId + "/page/" + model.pageId + "/widget/" + model.widgetId);
                         });
                 });
         }

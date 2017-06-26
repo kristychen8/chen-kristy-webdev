@@ -8,7 +8,8 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use(cookieParser());
-app.use(session({ secret: process.env.SESSION_SECRET,
+// app.use(session({ secret: process.env.SESSION_SECRET,
+app.use(session({ secret: "somesession",
     resave: true,
     saveUninitialized: true}));
 
@@ -21,8 +22,13 @@ app.use(app.express.static(__dirname + '/public'));
 
 require ("./test/app.js");
 
-require("./assignment/model/models.server");
-require("./assignment/app.js");
+// assignments
+// require("./assignment/model/models.server");
+// require("./assignment/app.js");
+
+//project
+require("./project/model/models.server");
+require("./project/app.js");
 
 var port = process.env.PORT || 3000;
 

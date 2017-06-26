@@ -4,6 +4,52 @@
         .config(Config);
     function Config($routeProvider) {
         $routeProvider
+        // project implementation
+            .when("/", {
+                templateUrl: "project/views/user/templates/login.view.client.html",
+                controller: "LoginControllerMovieTag",
+                controllerAs: "vm"
+            })
+            .when("/search", {
+                templateUrl: "project/views/user/templates/login.view.client.html",
+                controller: "LoginControllerMovieTag",
+                controllerAs: "vm"
+            })
+            .when("/search/:search", {
+                templateUrl: "project/views/movie/templates/anon-search-result.view.client.html",
+                controller: "SearchControllerMovieTag",
+                controllerAs: "vm"
+            })
+            .when("/search/:search/:mid", {
+                templateUrl: "project/views/movie/templates/movie-detail.view.client.html",
+                controller: "MovieDetailControllerMovieTag",
+                controllerAs: "vm"
+            })
+            .when("/login", {
+                templateUrl: "project/views/user/templates/login.view.client.html",
+                controller: "LoginControllerMovieTag",
+                controllerAs: "vm"
+            })
+            .when("/register", {
+                templateUrl: "project/views/user/templates/register.view.client.html",
+                controller: "RegisterControllerMovieTag",
+                controllerAs: "vm"
+            })
+            .when("/profile", {
+                templateUrl: "project/views/user/templates/profile.view.client.html",
+                controller: "ProfileControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/search", {
+                templateUrl: "project/views/movie/templates/search.view.client.html",
+                controller: "SearchControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+
+
+
             // POC
             .when("/poc", {
                 templateUrl: "poc/views/templates/home.view.client.html",
@@ -56,7 +102,7 @@
                 templateUrl: "prototype/views/movie/templates/search.view.client.html",
                 controller: "SearchController",
                 controllerAs: 'model'
-             })
+            })
             .when("/prototype/user/:uid/search/:mid", {
                 templateUrl: "prototype/views/movie/templates/detail.view.client.html",
                 controller: "DetailController",
@@ -72,4 +118,22 @@
                 controller: "ProfileDetailController",
                 controllerAs: 'model'
             })
-}})();
+    }
+
+        function checkLoggedIn($q, $location, UserServiceMovieTag, $rootScope) {
+            var deferred = $q.defer();
+            UserServiceMovieTag
+                .checkLoggedIn()
+                .then(function (currentUser) {
+                    if (currentUser === '0') {
+                        deferred.reject();
+                        $location.url('/login');
+                    } else {
+                        $rootScope.currentUser = currentUser;
+                        deferred.resolve(currentUser);
+                    }
+                });
+            return deferred.promise;
+        }
+
+})();

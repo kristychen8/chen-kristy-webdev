@@ -1,0 +1,80 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand login">
+                <span class="glyphicon glyphicon-film"></span>
+                MovieTag
+            </a>
+
+            <div class="input-group col-xs-4">
+                <input type="text"
+                       class="form-control"
+                       ng-model="searchText"
+                       placeholder="Search Movie">
+                <span class="input-group-btn">
+                    <button class="btn btn-default"
+                            ng-click="vm.searchMovieDetail(searchText)"
+                            type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-show="vm.inform" class="alert alert-info">
+        {{vm.inform}}
+    </div>
+
+    <h1>Login</h1>
+
+    <div ng-show="vm.alert" class="alert alert-danger">
+        {{vm.alert}}
+    </div>
+
+    <form name="loginpage" ng-class="{submitted:loginpage.submitted}">
+
+        <div class="form-group" ng-class="{ 'has-error' : loginpage.submitted && loginpage.username.$error.required}">
+            <label for="username">Username</label>
+            <input ng-model="vm.user.username"
+                   autocorrect = "off"
+                   autocapitalize = "off"
+                   autocomplete="off"
+                   spellcheck="false"
+                   type="text"
+                   id="username"
+                   class="form-control"
+                   name="username"
+                   placeholder="username" required/>
+            <p class="help-block" ng-show="loginpage.submitted && loginpage.username.$error.required ">Username is required</p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : loginpage.submitted && loginpage.password.$error.required}">
+            <label for="password">Password</label>
+            <input ng-model="vm.user.password"
+                   name="password"
+                   type="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="password" required/>
+            <p class="help-block" ng-show="loginpage.submitted && loginpage.password.$error.required ">Password is required</p>
+        </div>
+
+        <a class="btn btn-primary btn-block"
+           ng-click="vm.login(vm.user)">Login</a>
+
+        <a href="/auth/google" class="btn btn-block btn-danger">
+            <span class="fa fa-google-plus"></span>
+            Sign in with Google
+        </a>
+
+        <a class="btn btn-success btn-block"
+           href="#!/register">Register</a>
+    </form>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+</nav>

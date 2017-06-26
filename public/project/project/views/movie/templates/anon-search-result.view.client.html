@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#!/"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </p>
+
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                <span class="glyphicon glyphicon-film"></span>
+                MovieTag
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <h3>Select Movie to View Information</h3>
+    <ul class="list-group">
+        <div class="row">
+            <li ng-repeat="movie in vm.movies"
+                class="list-group-item col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <a href="#!/search/{{vm.search}}/{{movie.id}}">
+                    <img class="movieImage"
+                         ng-src="https://image.tmdb.org/t/p/original{{movie.poster_path}}"/>
+                </a>
+            </li>
+        </div>
+    </ul>
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+</nav>

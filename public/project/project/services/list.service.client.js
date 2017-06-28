@@ -5,102 +5,73 @@
 
     function ListServiceMovieTag($http) {
         var api = {
-            "createUser": createUser,
-            "findUserById": findUserById,
-            "findUserByUsername": findUserByUsername,
-            "findUserByCredentials": findUserByCredentials,
-            "updateUser": updateUser,
-            "deleteUser": deleteUser,
-            "login": login,
-            "register": register,
-            "logout": logout,
-            "checkLoggedIn": checkLoggedIn
+            "createList": createList,
+            "findListByUser": findListByUser,
+            "findListById": findListById,
+            "findListWithSpecificItem": findListWithSpecificItem,
+            "addItemToSpecificList": addItemToSpecificList,
+            "removeItemFromSpecificList": removeItemFromSpecificList,
+            "updateRated": updateRated
         };
         return api;
 
-        function login(username, password) {
-            var url = "/api/movietag/login";
-            var credentials = {
-                username: username,
-                password: password
-            };
-            return $http.post(url, credentials)
+        function createList(list) {
+            var url = "/api/movietag/user/list";
+            return $http.post(url, list)
                 .then(function (response) {
                     return response.data;
                 });
         }
 
-        function register(user) {
-            var url = "/api/movietag/register";
-            return $http.post(url, user)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function logout() {
-            var url = "/api/movietag/logout";
-            return $http.post(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function checkLoggedIn() {
-            var url = "/api/movietag/checkLoggedIn";
+        function findListByUser(userId) {
+            var url = "/api/movietag/user/" + userId +"/list";
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });
         }
 
-        function createUser(user) {
-            var url = "/api/movietag/user";
-            return $http.post(url, user)
+        function findListById(listId) {
+            var url = "/api/movietag/list/" + listId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findListWithSpecificItem(listId, id, list) {
+            var url = "/api/movietag/list/" + listId + "/type/" + list + "/" + id;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function addItemToSpecificList(listId, list, array) {
+            var url = "/api/movietag/list/" + listId + "/type/" + list;
+            return $http.post(url, array)
                 .then(function (response) {
                     return response.data;
                 })
         }
 
-        function findUserById(userId) {
-            var url = "/api/movietag/user/" + userId;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function findUserByUsername(username) {
-            var url = "/api/movietag/user?username=" + username;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function findUserByCredentials(username, password) {
-            var url = "/api/movietag/user?username=" + username + "&password=" + password;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function updateUser(userId, user) {
-            var url = "/api/movietag/user/" + userId;
-            return $http.put(url, user)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function deleteUser(userId) {
-            var url = "/api/movietag/user/" + userId;
+        function removeItemFromSpecificList(listId, id, list) {
+            var url = "/api/movietag/list/" + listId + "/type/" + list + "/" + id;
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;
                 });
         }
+
+        function updateRated(listId, mid, rate) {
+            var url = "/api/movietag/list/" + listId + "/type/rate/" + mid;
+            console.log(rate);
+            return $http.put(url, rate)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
 
     }
 })();

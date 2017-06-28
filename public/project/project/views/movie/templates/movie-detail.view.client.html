@@ -7,7 +7,7 @@
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
 
-                <a ng-if="vm.uid" href="#!/profile/{{vm.search}}"
+                <a ng-if="vm.uid" href="#!/profile/search"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
@@ -58,17 +58,17 @@
 
         <div class="stars">
             <h5>Average User Rating: {{vm.rating}}</h5>
-            <h5>Your Rating: {{vm.yourRating}}</h5>
+            <h5>Your Rating: {{vm.yourRating}}/5</h5>
             <form>
-                <input ng-click="vm.rate('5')" class="star star-5" id="star-5" type="radio" name="star"/>
+                <input ng-checked ="(vm.yourRating == 5)" ng-click="vm.rate('5')" class="star star-5" id="star-5" type="radio" name="star"/>
                 <label class="star star-5" for="star-5"></label>
-                <input ng-click="vm.rate('4')" class="star star-4" id="star-4" type="radio" name="star"/>
+                <input ng-checked ="(vm.yourRating == 4)" ng-click="vm.rate('4')" class="star star-4" id="star-4" type="radio" name="star"/>
                 <label class="star star-4" for="star-4"></label>
-                <input ng-click="vm.rate('3')" class="star star-3" id="star-3" type="radio" name="star"/>
+                <input ng-checked ="(vm.yourRating == 3)" ng-click="vm.rate('3')" class="star star-3" id="star-3" type="radio" name="star"/>
                 <label class="star star-3" for="star-3"></label>
-                <input ng-click="vm.rate('2')" class="star star-2" id="star-2" type="radio" name="star"/>
+                <input ng-checked ="(vm.yourRating == 2)" ng-click="vm.rate('2')" class="star star-2" id="star-2" type="radio" name="star"/>
                 <label class="star star-2" for="star-2"></label>
-                <input ng-click="vm.rate('1')" class="star star-1" id="star-1" type="radio" name="star"/>
+                <input ng-checked ="(vm.yourRating == 1)" ng-click="vm.rate('1')" class="star star-1" id="star-1" type="radio" name="star"/>
                 <label class="star star-1" for="star-1"></label>
             </form>
         </div>
@@ -128,13 +128,11 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div ng-if="vm.uid" class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-right">
-                <a href="#!/profile"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </p>
-        </div>
+        <p class="navbar-text pull-right">
+            <a href="#!/profile"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
     </div>
 </nav>

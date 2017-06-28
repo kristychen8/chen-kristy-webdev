@@ -7,6 +7,7 @@
 
         this.searchMovies = searchMovies;
         this.movieDetails = movieDetails;
+        this.movieCredits = movieCredits;
         this.searchTheaters = searchTheaters;
         this.searchShowtimes = searchShowtimes;
 
@@ -19,6 +20,13 @@
 
         function movieDetails(movieId) {
             var urlBase = " https://api.themoviedb.org/3/movie/MOVIE_ID?api_key=a17412c76b1a0f72ad9b1279bcb178e2&language=en-US";
+            var url = urlBase
+                .replace("MOVIE_ID", movieId);
+            return $http.get(url);
+        }
+
+        function movieCredits(movieId) {
+            var urlBase = "https://api.themoviedb.org/3/movie/MOVIE_ID/credits?api_key=a17412c76b1a0f72ad9b1279bcb178e2";
             var url = urlBase
                 .replace("MOVIE_ID", movieId);
             return $http.get(url);

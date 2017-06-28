@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/profile/search/m/{{vm.mid}}"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand">
+                All Users
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="user in vm.users"
+                class="list-group-item">
+                <a href="#!/profile/search/m/{{vm.mid}}/profiles/{{user.username}}">
+                    {{user.username}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="#!/profile"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

@@ -14,7 +14,8 @@
             "login": login,
             "register": register,
             "logout": logout,
-            "checkLoggedIn": checkLoggedIn
+            "checkLoggedIn": checkLoggedIn,
+            "findAllUsersButYours": findAllUsersButYours
         };
         return api;
 
@@ -97,6 +98,14 @@
         function deleteUser(userId) {
             var url = "/api/movietag/user/" + userId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findAllUsersButYours(userId) {
+            var url = "/api/movietag/user/profileList/" + userId;
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });

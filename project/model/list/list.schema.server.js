@@ -1,29 +1,29 @@
 var mongoose = require('mongoose');
 var listSchemaProject = mongoose.Schema({
-    username: String,
+    _user: [{type: mongoose.Schema.Types.ObjectId, ref:"UserModelProject"}],
     followers: [{
-        uid: {type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"},
+        id: {type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"},
         username: String
     }],
     following: [{
-        uid: {type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"},
+        id: {type: mongoose.Schema.Types.ObjectId, ref: "UserModelProject"},
         username: String
     }],
     toWatch: [{
-        mid: Number,
+        id: Number,
         title: String
     }],
     alreadyWatched: [{
-        mid: Number,
+        id: Number,
         title: String
     }],
     ratedMovies: [{
-        mid: Number,
+        id: Number,
         title: String,
-        rate: Number
+        rate: {type: Number, default:0}
     }],
     movieSchedule: [{
-        mid: Number,
+        id: Number,
         title: String
     }]
 }, {collection: "listProject"});

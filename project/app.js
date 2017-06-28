@@ -14,3 +14,4 @@ mongoose.connect(connectionStringProject);
 
 
 require("./services/user.service.server.js");
+require("./services/list.service.server.js");

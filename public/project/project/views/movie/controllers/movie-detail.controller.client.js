@@ -10,15 +10,15 @@
         vm.search = $routeParams['search'];
         vm.mid = $routeParams['mid'];
         vm.rates = null;
-        vm.watched = null;
-        vm.yourRating = 0;
         var movie = {};
         var mainCast=[];
         var mainCrew=[];
 
         vm.cast ={};
-        vm.bookmarked = false;
 
+        vm.bookmarked = false;
+        vm.watched = false;
+        vm.yourRating = 0;
 
         vm.bookmark = bookmark;
         vm.watch = watch;
@@ -27,12 +27,34 @@
 
         if($rootScope.currentUser) {
             vm.uid = $rootScope.currentUser._id;
-
-            // ListServiceMovieTag
-            //     .findIndexMovie('mid')
-            //     .then(function(index){
-            //         vm.rates = vm.uid.list.ratedMovies[index].rate
-            //     });
+            ListServiceMovieTag
+                .findListByUser(vm.uid)
+                .then(function(list) {
+                    vm.listId = list[0]._id;
+                    ListServiceMovieTag
+                        .findListWithSpecificItem(vm.listId, vm.mid,"toWatch")
+                        .then(function(list) {
+                            if (list.length !== 0)
+                                vm.bookmarked = true;
+                        });
+                    ListServiceMovieTag
+                        .findListWithSpecificItem(vm.listId, vm.mid,"alreadyWatched")
+                        .then(function(list) {
+                            if (list.length !== 0)
+                                vm.watched = true;
+                        });
+                    ListServiceMovieTag
+                        .findListWithSpecificItem(vm.listId, vm.mid,"ratedMovies")
+                        .then(function(list) {
+                            if (list.length !== 0) {
+                            for (var i = 0; i < list[0].ratedMovies.length; i++) {
+                                if(list[0].ratedMovies[i].id == vm.mid) {
+                                    vm.yourRating = list[0].ratedMovies[i].rate;
+                                }
+                            }
+                             }
+                        });
+                });
         }
 
 
@@ -41,7 +63,7 @@
             .then(function(response) {
                 vm.detail = response.data;
                 // console.log(vm.detail);
-                movie = {id: vm.mid, name: vm.detail.title};
+                movie = {id: vm.mid, title: vm.detail.title};
             });
 
         MovieServiceMovieTag
@@ -73,8 +95,27 @@
 
 
         function rate(value) {
+            var r = {
+                "rate" : value
+            };
             if(vm.uid) {
-
+                ListServiceMovieTag
+                    .findListWithSpecificItem(vm.listId, vm.mid,"ratedMovies")
+                    .then(function(list) {
+                        if (list.length !== 0) {
+                            ListServiceMovieTag
+                                .updateRated(vm.listId, vm.mid, r);
+                        }
+                        else{
+                            ListServiceMovieTag
+                                .addItemToSpecificList(vm.listId,"ratedMovies", movie)
+                                .then(function() {
+                                    ListServiceMovieTag
+                                        .updateRated(vm.listId, vm.mid, r);
+                                });
+                        }
+                        vm.yourRating = value;
+                    })
             }
             else {
                 vm.alert = "Sign in to rate movies"
@@ -83,57 +124,53 @@
 
         function bookmark(){
             if(vm.uid) {
-                if (vm.bookmarked) {
-                    vm.bookmarked = false;
-                }
-                else {
-                    vm.bookmarked = true;
-                }
+                vm.bookmarked = !vm.bookmarked;
+                ListServiceMovieTag
+                    .findListWithSpecificItem(vm.listId, vm.mid,"toWatch")
+                    .then(function(list) {
+                        if (list.length !== 0) {
+                            ListServiceMovieTag
+                                .removeItemFromSpecificList(vm.listId,vm.mid, "toWatch");
+                        }
+                        else{
+                            ListServiceMovieTag
+                                .addItemToSpecificList(vm.listId,"toWatch", movie);
+                        }
+                    })
             }
             else {
                 vm.alert = "Sign in to bookmark movies"
             }
-            // if (UserServiceMovieTag.findBookmarked(vm.uid, vm.mid)){
-            //     vm.alert = "Movie Already Bookmarked"
-            // } else{
-            //
-            //     UserServiceMovieTag
-            //         .addbookmark(vm.uid, movie);
-            //     $location.url('/prototype/user/' + vm.uid);
-            // }
         }
 
         function watch(){
-            if(vm.watched) {
-
+            if(vm.uid) {
+                vm.watched = !vm.watched;
+                ListServiceMovieTag
+                    .findListWithSpecificItem(vm.listId, vm.mid,"alreadyWatched")
+                    .then(function(list) {
+                        if (list.length !== 0) {
+                            ListServiceMovieTag
+                                .removeItemFromSpecificList(vm.listId,vm.mid, "alreadyWatched");
+                        }
+                        else{
+                            ListServiceMovieTag
+                                .addItemToSpecificList(vm.listId,"alreadyWatched", movie);
+                        }
+                    })
             }
             else {
                 vm.alert = "Sign in to add movies to watched list"
             }
-            // if (UserServiceMovieTag.findBookmarked(vm.uid, vm.mid)){
-            //     vm.alert = "Movie Already Bookmarked"
-            // } else{
-            //
-            //     UserServiceMovieTag
-            //         .addbookmark(vm.uid, movie);
-            //     $location.url('/prototype/user/' + vm.uid);
-            // }
         }
 
         function users() {
             if (vm.uid) {
-
+                $location.url("/profile/search/m/" + vm.mid +"/profiles");
             }
             else {
                 vm.alert = "Sign in to see and follow other users"
             }
-            // if (UserServiceMovieTag.findBookmarked(vm.uid, vm.mid)){
-            //     vm.alert = "Movie Already Bookmarked"
-            // } else{
-            //
-            //     UserServiceMovieTag
-            //         .addbookmark(vm.uid, movie);
-            //     $location.url('/prototype/user/' + vm.uid);
         }
     }
 })();

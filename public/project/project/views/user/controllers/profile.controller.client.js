@@ -3,12 +3,12 @@
         .module("MovieTag")
         .controller("ProfileControllerMovieTag", ProfileControllerMovieTag);
 
-    function ProfileControllerMovieTag(currentUser, $routeParams, UserServiceMovieTag, $location) {
+    function ProfileControllerMovieTag($rootScope, $routeParams, UserServiceMovieTag, $location) {
         var vm = this;
 
-        var uid = currentUser._id;
+        var uid = $rootScope.currentUser._id;
 
-        vm.user = currentUser;
+        vm.user = $rootScope.currentUser;
         vm.profileUpdate = profileUpdate;
         vm.profileDelete = profileDelete;
         vm.logout = logout;
@@ -36,6 +36,7 @@
             UserServiceMovieTag
                 .logout()
                 .then(function() {
+                    $rootScope.currentUser = null;
                     $location.url('/login');
                     // $location.url('/');
 

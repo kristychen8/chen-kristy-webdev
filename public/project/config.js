@@ -47,6 +47,43 @@
                 controllerAs: "vm",
                 resolve: {currentUser: checkLoggedIn}
             })
+            .when("/profile/search/t", {
+                templateUrl: "project/views/movie/templates/search.view.client.html",
+                controller: "SearchControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/search/m", {
+                templateUrl: "project/views/movie/templates/search.view.client.html",
+                controller: "SearchControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/search/m/:mid", {
+                templateUrl: "project/views/movie/templates/movie-detail.view.client.html",
+                controller: "MovieDetailControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/search/t/:tid", {
+                templateUrl: "project/views/movie/templates/theater.view.client.html",
+                controller: "TheaterControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/search/m/:mid/profiles", {
+                templateUrl: "project/views/profile/templates/profile-list.view.client.html",
+                controller: "ProfileListControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/search/m/:mid/profiles/:pid", {
+                templateUrl: "project/views/profile/templates/profile-detail.view.client.html",
+                controller: "ProfileDetailControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+
 
 
 

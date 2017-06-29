@@ -1,0 +1,49 @@
+<nav class="navbar navbar-default navbar-fixed-top nav1">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/profile"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand login">
+                <span class="glyphicon glyphicon-film"></span>
+                MovieTag
+            </a>
+
+            <p class="navbar-text pull-right">
+                <a href="#!/admin/new"
+                   class="navbar-link">
+                    Add User <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <ul class="list-group">
+        <li ng-repeat="user in vm.users"
+            class="list-group-item">
+                {{user.username}}
+            <a href="#!/admin/{{user.username}}">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="#!/profile"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

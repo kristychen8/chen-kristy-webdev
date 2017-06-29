@@ -11,6 +11,6 @@ You can find more about me and my projects [here](http://kristychen8.github.io).
 1. root to the hosted environment on Heroku
     * https://chen-kristy-webdev.herokuapp.com
 2. link to project
-    * TBD
+    * https://chen-kristy-webdev.herokuapp.com/project/index.html
 3. link to assignment
     * https://chen-kristy-webdev.herokuapp.com/assignment/index.html

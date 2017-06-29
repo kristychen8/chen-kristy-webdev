@@ -1,0 +1,86 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+
+                <a href="#!/admin"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand login">
+                <span class="glyphicon glyphicon-film"></span>
+                MovieTag
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-show="vm.alert" class="alert alert-info">
+        {{vm.alert}}
+    </div>
+
+    <div class="form-group">
+        <label for="profile-username">Username</label>
+        <input ng-model="vm.user.username"
+               type="text"
+               class="form-control"
+               id="profile-username"
+               readonly value="alice">
+    </div>
+
+        <div class="form-group">
+            <label for="profile-email">Email Address</label>
+            <input ng-model="vm.user.email"
+                   type="email"
+                   class="form-control"
+                   id="profile-email"
+                   placeholder="email address">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-phone">Phone Number</label>
+            <input ng-model="vm.user.phone"
+                   type="text"
+                   class="form-control"
+                   id="profile-phone"
+                   placeholder="phone number">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-first-name">First Name</label>
+            <input ng-model="vm.user.firstName"
+                   type="text"
+                   class="form-control"
+                   id="profile-first-name"
+                   placeholder="first name">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-last-name">Last Name</label>
+            <input ng-model="vm.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="profile-last-name"
+                   placeholder="last name">
+        </div>
+    </form>
+
+
+    <a class="btn btn-success btn-block"
+       ng-click="vm.updateUser()">Update User</a>
+    <a ng-click="vm.deleteUser()" class="btn btn-block btn-danger">Delete User</a>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div ng-if="vm.uid" class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#!/profile"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
+    </div>
+</nav>

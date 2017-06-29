@@ -8,7 +8,7 @@ var userSchemaProject = mongoose.Schema({
     phone: String,
     list: [{type: mongoose.Schema.Types.ObjectId, ref:"ListModelProject"}],
     dateCreated: {type: Date, default: Date.now},
-    roles:[{type: String, default: 'reviewer', enum:['reviewer', 'admin']}],
+    roles:[{type: String, default: "reviewer", enum:["reviewer", "admin"]}],
     google: {
         id: String,
         token: String

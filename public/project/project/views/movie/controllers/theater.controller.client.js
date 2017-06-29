@@ -12,12 +12,15 @@
 
         model.bookmark = bookmark;
 
-        pocService
-            .movieDetails(model.mid)
-            .then(function(response) {
-                model.detail = response.data;
-                movie = {id: model.mid, name: model.detail.title};
-            });
+        function init() {
+            pocService
+                .movieDetails(model.mid)
+                .then(function (response) {
+                    model.detail = response.data;
+                    movie = {id: model.mid, name: model.detail.title};
+                });
+        }
+        init();
 
         function bookmark(){
             if (UserService.findBookmarked(model.uid, model.mid)){

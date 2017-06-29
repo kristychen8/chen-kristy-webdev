@@ -12,6 +12,8 @@
         vm.searchMovie = searchMovie;
         vm.searchTheater = searchTheater;
 
+        function init() {
+
             MovieServiceMovieTag
                 .searchMovies(vm.search)
                 .then(function (response) {
@@ -28,6 +30,8 @@
                     }
                     empty = [];
                 });
+        }
+        init();
 
 
         function searchMovie(movie) {

@@ -2,10 +2,20 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/profile/search/m/{{vm.mid}}/profiles"
+                <a ng-if="vm.mid && !vm.fromProfile" href="#!/profile/search/m/{{vm.mid}}/profiles"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
-                </a></p>
+                </a>
+                <a ng-if="!vm.mid && !vm.fromProfile" href="#!/profile/community"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a ng-if="vm.fromProfile" href="#!/profile"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+
+            </p>
             <a class="navbar-brand">
                 {{vm.user.username}}'s profile
             </a>
@@ -72,44 +82,68 @@
         </div>
     </form>
 
-    <p>
-        FOLLOWERS:
-    </p>
-    <div class="row">
-        <ul class="list-group">
-            <li ng-repeat="follower in vm.user.followers"
-                class="list-group-item">
-                {{follower.username}}
-        </ul>
-        </li>
-    </div>
+    <div class = "collapselist" data-toggle="collapse" data-target="#list">List <i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+    <div id="list" class="collapse">
+        <div class="collapseSubList" data-toggle="collapse" data-target="#following">Following<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="following" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="follow in vm.list[0].following"
+                        class="list-group-item">
+                            {{follow.username}}
+                    </li>
 
-    <p>
-        FOLLOWING:
-    </p>
-    <div class="row">
-        <ul class="list-group">
-            <li ng-repeat="follow in vm.user.followed"
-                class="list-group-item">
-                <a href="#!/prototype/user/{{vm.uid}}/profile/{{follow.id}}">
-                    {{follow.username}}
-                </a>
-        </ul>
-        </li>
-    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#follower">Followers<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="follower" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="follow in vm.list[0].followers"
+                        class="list-group-item">
+                            {{follow.username}}
+                    </li>
 
-    <p>
-        BOOKMARKS:
-    </p>
-    <div class="row">
-        <ul class="list-group">
-            <li ng-repeat="bookmark in vm.user.bookmark"
-                class="list-group-item">
-                <a href="#!/prototype/user/{{vm.uid}}/search/{{bookmark.id}}">
-                    {{bookmark.name}}
-                </a>
-        </ul>
-        </li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#toWatch">Need To Watch Movie BucketList<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="toWatch" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="movie in vm.list[0].toWatch"
+                        class="list-group-item">
+                        <a href="#!/profile/search/m/{{movie.id}}/true">
+                            {{movie.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#seen">Seen Movie List<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="seen" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="movie in vm.list[0].alreadyWatched"
+                        class="list-group-item">
+                            {{movie.title}}
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#rated">Movies Rated<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="rated" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="movie in vm.list[0].ratedMovies"
+                        class="list-group-item">
+                            {{movie.title}} : {{movie.rate}}/5
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
 </div>

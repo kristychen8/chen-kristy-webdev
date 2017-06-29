@@ -50,6 +50,9 @@ function findListWithSpecificItem(listId, id, list){
     if (list === "usersSeenSameMovie") {
         return ListModelProject.find({"alreadyWatched.id":id}, {"_user":1})
     }
+    if (list === "allRatingsForMovie") {
+        return ListModelProject.find({"ratedMovies.id":id}, {"ratedMovies":1})
+    }
 }
 
 function addItemToSpecificList(listId, list, array){

@@ -1,13 +1,10 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a href="#!/"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-film"></span>
-                    MovieTag
-                </a>
-            </p>
+            <a class="navbar-brand login">
+                <span class="glyphicon glyphicon-film"></span>
+                MovieTag
+            </a>
 
 
         <p class="navbar-text pull-right">
@@ -76,14 +73,87 @@
         </div>
     </form>
 
+    <div class = "collapselist" data-toggle="collapse" data-target="#list">List <i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+    <div id="list" class="collapse">
+        <div class="collapseSubList" data-toggle="collapse" data-target="#following">Following<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="following" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="follow in vm.list[0].following"
+                        class="list-group-item">
+                        <a href="#!/profile/community/{{follow.username}}/t/true">
+                            {{follow.username}}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#follower">Followers<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="follower" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="follow in vm.list[0].followers"
+                        class="list-group-item">
+                        <a href="#!/profile/community/{{follow.username}}/t/true">
+                            {{follow.username}}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#toWatch">Need To Watch Movie BucketList<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="toWatch" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="movie in vm.list[0].toWatch"
+                        class="list-group-item">
+                        <a href="#!/profile/search/m/{{movie.id}}/t/true">
+                            {{movie.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#seen">Seen Movie List<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="seen" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="movie in vm.list[0].alreadyWatched"
+                        class="list-group-item">
+                        <a href="#!/profile/search/m/{{movie.id}}/t/true">
+                            {{movie.title}}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="collapseSubList" data-toggle="collapse" data-target="#rated">Movies Rated<i class="fa fa-plus pull-right" aria-hidden="true"></i></div>
+        <div id="rated" class="collapse">
+            <div class="row lists">
+                <ul class="list-group">
+                    <li ng-repeat="movie in vm.list[0].ratedMovies"
+                        class="list-group-item">
+                        <a href="#!/profile/search/m/{{movie.id}}/t/true">
+                            {{movie.title}} : {{movie.rate}}/5
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
     <a ng-if="vm.user.roles.indexOf('admin') > -1" class="btn btn-primary btn-block"
-       ng-click="vm.toAdmin()">Admin Page</a>
+       href="#!/admin">Admin Page</a>
 
     <a class="btn btn-info btn-block"
-       href="#!/profile/search">Search Page</a>
+       href="#!/profile/search">Search Movie/Theater</a>
 
     <a class="btn btn-success btn-block"
-       href="#!/profile/search">Search Page</a>
+       href="#!/profile/community">Search Community</a>
 
     <a class="btn btn-danger btn-block"
        ng-click="vm.logout()">Logout</a>

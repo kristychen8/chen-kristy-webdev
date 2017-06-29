@@ -65,7 +65,6 @@
 
         function updateRated(listId, mid, rate) {
             var url = "/api/movietag/list/" + listId + "/type/rate/" + mid;
-            console.log(rate);
             return $http.put(url, rate)
                 .then(function (response) {
                     return response.data;

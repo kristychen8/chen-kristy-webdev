@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var userSchemaProject = require('./user.schema.server');
 var UserModelProject = mongoose.model('UserModelProject', userSchemaProject);
-// var listSchema = require('../list/list.schema.server');
-// var ListModelProject = mongoose.model('ListModelProject', listSchema);
 
 UserModelProject.createUser = createUser;
 UserModelProject.findUserById = findUserById;
@@ -12,6 +10,7 @@ UserModelProject.deleteUser = deleteUser;
 UserModelProject.updateUser = updateUser;
 UserModelProject.findUserByGoogleId = findUserByGoogleId;
 UserModelProject.findAllUsersButYours = findAllUsersButYours;
+UserModelProject.findAllUsers = findAllUsers;
 
 module.exports = UserModelProject;
 
@@ -45,4 +44,8 @@ function findUserByGoogleId(googleId) {
 
 function findAllUsersButYours(userId) {
     return UserModelProject.find({'_id':{$ne: userId}});
+}
+
+function findAllUsers() {
+    return UserModelProject.find();
 }

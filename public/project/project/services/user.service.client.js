@@ -15,7 +15,9 @@
             "register": register,
             "logout": logout,
             "checkLoggedIn": checkLoggedIn,
-            "findAllUsersButYours": findAllUsersButYours
+            "checkAdmin": checkAdmin,
+            "findAllUsersButYours": findAllUsersButYours,
+            "findAllUsers": findAllUsers
         };
         return api;
 
@@ -49,6 +51,14 @@
 
         function checkLoggedIn() {
             var url = "/api/movietag/checkLoggedIn";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkAdmin() {
+            var url = "/api/movietag/checkAdmin";
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -110,6 +120,15 @@
                     return response.data;
                 });
         }
+
+        function findAllUsers() {
+            var url = "/api/movietag/users";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
 
     }
 })();

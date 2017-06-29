@@ -2,12 +2,22 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a ng-if="!vm.uid" href="#!/search/{{vm.search}}"
+                <a ng-if="!vm.uid && !vm.fromProfile && !vm.fromOtherUser" href="#!/search/{{vm.search}}"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
 
-                <a ng-if="vm.uid" href="#!/profile/search"
+                <a ng-if="vm.uid && !vm.fromProfile && !vm.fromOtherUser" href="#!/profile/search"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+
+                <a ng-if="vm.fromProfile && !vm.fromOtherUser" href="#!/profile/"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+
+                <a ng-if="vm.fromOtherUser" href="#!/profile/community/{{vm.fromOtherUser}}/true"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
@@ -57,8 +67,8 @@
         <h4> {{vm.detail.overview}} </h4>
 
         <div class="stars">
-            <h5>Average User Rating: {{vm.rating}}</h5>
-            <h5>Your Rating: {{vm.yourRating}}/5</h5>
+            <h5>Average User Rating ({{vm.count}} Users): {{vm.rating}} / 5</h5>
+            <h5>Your Rating: {{vm.yourRating}} / 5</h5>
             <form>
                 <input ng-checked ="(vm.yourRating == 5)" ng-click="vm.rate('5')" class="star star-5" id="star-5" type="radio" name="star"/>
                 <label class="star star-5" for="star-5"></label>

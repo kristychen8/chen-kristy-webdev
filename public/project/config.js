@@ -35,6 +35,26 @@
                 controller: "RegisterControllerMovieTag",
                 controllerAs: "vm"
             })
+            .when("/admin", {
+                templateUrl: "project/views/admin/templates/admin.view.client.html",
+                controller: "AdminControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkAdmin}
+
+            })
+            .when("/admin/new", {
+                templateUrl: "project/views/admin/templates/admin-new.view.client.html",
+                controller: "AdminNewControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkAdmin}
+
+            })
+            .when("/admin/:user", {
+                templateUrl: "project/views/admin/templates/admin-edit.view.client.html",
+                controller: "AdminEditControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkAdmin}
+            })
             .when("/profile", {
                 templateUrl: "project/views/user/templates/profile.view.client.html",
                 controller: "ProfileControllerMovieTag",
@@ -65,6 +85,18 @@
                 controllerAs: "vm",
                 resolve: {currentUser: checkLoggedIn}
             })
+            .when("/profile/search/m/:mid/t/:p", {
+                templateUrl: "project/views/movie/templates/movie-detail.view.client.html",
+                controller: "MovieDetailControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            // .when("/profile/search/m/:mid/t/:fromOtherUser", {
+            //     templateUrl: "project/views/movie/templates/movie-detail.view.client.html",
+            //     controller: "MovieDetailControllerMovieTag",
+            //     controllerAs: "vm",
+            //     resolve: {currentUser: checkLoggedIn}
+            // })
             .when("/profile/search/t/:tid", {
                 templateUrl: "project/views/movie/templates/theater.view.client.html",
                 controller: "TheaterControllerMovieTag",
@@ -78,6 +110,24 @@
                 resolve: {currentUser: checkLoggedIn}
             })
             .when("/profile/search/m/:mid/profiles/:pid", {
+                templateUrl: "project/views/profile/templates/profile-detail.view.client.html",
+                controller: "ProfileDetailControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/community", {
+                templateUrl: "project/views/profile/templates/profile-list.view.client.html",
+                controller: "ProfileListControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/community/:pid", {
+                templateUrl: "project/views/profile/templates/profile-detail.view.client.html",
+                controller: "ProfileDetailControllerMovieTag",
+                controllerAs: "vm",
+                resolve: {currentUser: checkLoggedIn}
+            })
+            .when("/profile/community/:pid/t/:p", {
                 templateUrl: "project/views/profile/templates/profile-detail.view.client.html",
                 controller: "ProfileDetailControllerMovieTag",
                 controllerAs: "vm",
@@ -172,5 +222,21 @@
                 });
             return deferred.promise;
         }
+
+    function checkAdmin($rootScope, $q, $location, UserServiceMovieTag) {
+        var deferred = $q.defer();
+        UserServiceMovieTag
+            .checkAdmin()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.resolve({});
+                    $location.url('/profile');
+                } else {
+                    $rootScope.currentUser = currentUser;
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
+    }
 
 })();

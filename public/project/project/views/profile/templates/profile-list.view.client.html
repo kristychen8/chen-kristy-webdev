@@ -2,13 +2,21 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/profile/search/m/{{vm.mid}}"
+                <a ng-if="vm.mid" href="#!/profile/search/m/{{vm.mid}}"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+
+                <a ng-if="!vm.mid" href="#!/profile"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
 
-            <a class="navbar-brand">
+            <a ng-if="vm.mid" class="navbar-brand">
+                User Who Seen The Movie
+            </a>
+            <a ng-if="!vm.mid" class="navbar-brand">
                 All Users
             </a>
         </div>
@@ -20,7 +28,10 @@
         <ul class="list-group">
             <li ng-repeat="user in vm.users"
                 class="list-group-item">
-                <a href="#!/profile/search/m/{{vm.mid}}/profiles/{{user.username}}">
+                <a ng-if="vm.mid" href="#!/profile/search/m/{{vm.mid}}/profiles/{{user.username}}">
+                    {{user.username}}
+                </a>
+                <a ng-if="!vm.mid" href="#!/profile/community/{{user.username}}">
                     {{user.username}}
                 </a>
             </li>

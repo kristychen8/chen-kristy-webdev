@@ -9,33 +9,38 @@
         vm.pid = $routeParams['pid'];
         vm.mid = $routeParams['mid'];
         vm.uid = $rootScope.currentUser._id;
+        vm.fromProfile = $routeParams['p'];
         vm.followed = false;
 
 
         vm.follow = follow;
 
-        UserServiceMovieTag
-            .findUserByUsername(vm.pid)
-            .then(function(user) {
-                vm.user = user;
-                ListServiceMovieTag
-                    .findListByUser(vm.user._id)
-                    .then(function(list) {
-                        vm.profilelistId = list[0]._id;
-                        ListServiceMovieTag
-                            .findListWithSpecificItem(vm.profilelistId, vm.uid,"followers")
-                            .then(function(list) {
-                               if (list.length !== 0)
-                                vm.followed = true;
-                            })
-                    });
-            });
+        function init() {
+            UserServiceMovieTag
+                .findUserByUsername(vm.pid)
+                .then(function (user) {
+                    vm.user = user;
+                    ListServiceMovieTag
+                        .findListByUser(vm.user._id)
+                        .then(function (list) {
+                            vm.list = list;
+                            vm.profilelistId = list[0]._id;
+                            ListServiceMovieTag
+                                .findListWithSpecificItem(vm.profilelistId, vm.uid, "followers")
+                                .then(function (list) {
+                                    if (list.length !== 0)
+                                        vm.followed = true;
+                                })
+                        });
+                });
 
-        ListServiceMovieTag
-            .findListByUser(vm.uid)
-            .then(function(list) {
-                vm.listId = list[0]._id;
-            });
+            ListServiceMovieTag
+                .findListByUser(vm.uid)
+                .then(function (list) {
+                    vm.listId = list[0]._id;
+                });
+        }
+        init();
 
         function follow(){
             var following = {

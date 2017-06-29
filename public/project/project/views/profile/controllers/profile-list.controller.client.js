@@ -6,40 +6,47 @@
     function ProfileListControllerMovieTag ($rootScope, $routeParams, UserServiceMovieTag, ListServiceMovieTag) {
         var vm = this;
         vm.uid = $rootScope.currentUser._id;
-        vm.mid = $routeParams['mid'];
         vm.users = [];
         var usersSeenSameMovie = [];
+        vm.mid = null;
 
-        ListServiceMovieTag
-            .findListWithSpecificItem(0,vm.mid,"usersSeenSameMovie")
-            .then(function(list) {
-                usersSeenSameMovie = list;
-                // console.log(usersSeenSameMovie);
-                // console.log(vm.uid);
-                var index = -1;
-                for (var i = 0; i < usersSeenSameMovie.length; i++) {
-                    if (usersSeenSameMovie[i]._user[0] === vm.uid) {
-                        index = i;
-                    }
-                }
+        function init() {
+            if ($routeParams['mid']) {
+                vm.mid = $routeParams['mid'];
 
-                if (index > -1) {
-                    usersSeenSameMovie.splice(index, 1);
-                }
+                ListServiceMovieTag
+                    .findListWithSpecificItem(0, vm.mid, "usersSeenSameMovie")
+                    .then(function (list) {
+                        usersSeenSameMovie = list;
+                        var index = -1;
+                        for (var i = 0; i < usersSeenSameMovie.length; i++) {
+                            if (usersSeenSameMovie[i]._user[0] === vm.uid) {
+                                index = i;
+                            }
+                        }
 
-                for (i = 0; i < usersSeenSameMovie.length; i++) {
-                    UserServiceMovieTag
-                        .findUserById(usersSeenSameMovie[i]._user[0])
-                        .then(function(user) {
-                            vm.users.push(user);
-                        })
-                }
-            })
+                        if (index > -1) {
+                            usersSeenSameMovie.splice(index, 1);
+                        }
 
-        // UserServiceMovieTag
-        //     .findAllUsersButYours(vm.uid)
-        //     .then(function (users) {
-        //         vm.users = users;
-        //     });
+                        for (i = 0; i < usersSeenSameMovie.length; i++) {
+                            UserServiceMovieTag
+                                .findUserById(usersSeenSameMovie[i]._user[0])
+                                .then(function (user) {
+                                    vm.users.push(user);
+                                })
+                        }
+                    })
+
+            } else {
+                UserServiceMovieTag
+                    .findAllUsersButYours(vm.uid)
+                    .then(function (users) {
+                        vm.users = users;
+                    });
+            }
+        }
+        init();
+
     }
 })();

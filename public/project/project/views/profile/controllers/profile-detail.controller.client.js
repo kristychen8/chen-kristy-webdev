@@ -71,7 +71,9 @@
                                     .addItemToSpecificList(vm.profilelistId,"followers", follower)
                             });
                     }
-                })
+                });
+            $location.url("/profile");
+
         }
     }
 })();

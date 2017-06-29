@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-left">
+
+    <div class="navbar-header">
+            <p class="navbar-text pull-left movieDetail">
                 <a ng-if="!vm.uid && !vm.fromProfile && !vm.fromOtherUser" href="#!/search/{{vm.search}}"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -22,13 +22,10 @@
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
-
             <a class="navbar-brand">
                 <span class="glyphicon glyphicon-film"></span>
                 MovieTag
             </a>
-
-        </div>
     </div>
 </nav>
 

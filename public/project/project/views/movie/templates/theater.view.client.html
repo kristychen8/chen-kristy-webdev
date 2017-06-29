@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#!/profile/search"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </p>
 
-</body>
-</html>
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                <span class="glyphicon glyphicon-film"></span>
+                MovieTag
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <ul class="list-group">
+            <li ng-repeat="showtime in vm.showtimes"
+                class="list-group-item">
+                <h3>{{showtime.title}}</h3>
+                <p class="detail"> <b>Release Date:</b> {{showtime.releaseDate}} |
+                    <b>Run Time:</b> {{showtime.runTime}} |
+                    <span ng-repeat="genre in showtime.genres"> {{genre}} |</span>
+                </p>
+                <p><b>Directors:</b> <span ng-repeat="director in showtime.directors"> {{director}} |</span>
+                <b>Top Cast:</b><span ng-repeat="cast in showtime.topCast"> {{cast}} |</span></p>
+                <p><b>Short Description</b>: {{showtime.shortDescription}}</p>
+                <p><b>Showtimes:</b> <span ng-repeat="time in showtime.showtimes"> {{time.dateTime}} |</span></p>
+                <hr class="style2">
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#!/profile"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
+    </div>
+</nav>

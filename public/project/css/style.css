@@ -29,9 +29,27 @@ body {
     float: right;
 }
 
-.navbar-default .navbar-text {
+
+/*.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {*/
+    /*margin-left: -15px;*/
+/*}*/
+p.navbar-text.pull-left.movieDetail {
+    margin-right: 0px;
+}
+div.navbar-header.anon-search, a.navbar-brand.login {
+    margin-left: -15px;
+}
+.row{
     margin-left: 0px;
 }
+.navbar-text.pull-left.profile {
+     margin-left: 0px;
+}
+
+/*.navbar>.container-fluid .navbar-brand {*/
+/*.navbar-default .navbar-text {*/
+    /*margin-left: 0px;*/
+/*}*/
 
 .navbar-header {
     font-size: 18px;

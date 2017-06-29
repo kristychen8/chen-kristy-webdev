@@ -1,18 +1,16 @@
 var app = require('../../express');
 var UserModelProject = require('../model/user/user.model.server.js');
+var ListModelProject = require('../model/list/list.model.server.js');
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var googleConfig = {
-    // clientID     : process.env.GOOGLE_CLIENT_ID,
-    // clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-    // callbackURL  : process.env.GOOGLE_CALLBACK_URL
-    // profileFields : ['id', 'displayName', 'emails']
-    clientID     : "501400882181-56bcgt28k2ms0hrjk0ravvfm4hbe46vb.apps.googleusercontent.com",
-    clientSecret : "BxLTOqnG-3udzGeXIK7tOAsg",
-    callbackURL  : "/auth/google/callback"
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : process.env.GOOGLE_CALLBACK_URL,
+    profileFields : ['id', 'displayName', 'emails']
 };
 
 passport.use(new LocalStrategy(localStrategy));
@@ -21,14 +19,17 @@ passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
+app.get('/api/movietag/users', isAdmin, findAllUsers);
 app.post('/api/movietag/user', createUser);
 app.get('/api/movietag/user', findUser);
 app.get('/api/movietag/user/:userId', findUserById);
 app.put('/api/movietag/user/:userId', updateUser);
 app.delete('/api/movietag/user/:userId', deleteUser);
+app.get('/api/movietag/user/profileList/:userId', findAllUsersButYours);
 
 app.post  ('/api/movietag/login', passport.authenticate('local'), login);
 app.get   ('/api/movietag/checkLoggedIn', checkLoggedIn);
+app.get   ('/api/movietag/checkAdmin', checkAdmin);
 app.post  ('/api/movietag/logout', logout);
 app.post  ('/api/movietag/register', register);
 app.get ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email']}));
@@ -37,13 +38,6 @@ app.get('/auth/google/callback',
         successRedirect: '/project/index.html#!/profile',
         failureRedirect: '/project/index.html#!/login'
     }));
-
-// var users = [
-//     {_id: "123", username: "alice", password: "alice", email: "alice@wonderland.com", firstName: "Alice", lastName: "Wonder"},
-//     {_id: "234", username: "bob", password: "bob", email: "bob@marley.com", firstName: "Bob", lastName: "Marley"},
-//     {_id: "345", username: "charly", password: "charly", email: "charly@garcia.com", firstName: "Charly", lastName: "Garcia"},
-//     {_id: "456", username: "jannunzi", password: "jannunzi", email: "jose@annunzi.com", firstName: "Jose", lastName: "Annunzi"}
-// ];
 
 function localStrategy(username, password, done) {
     UserModelProject
@@ -71,26 +65,42 @@ function googleStrategy(token, refreshToken, profile, done) {
     UserModelProject
         .findUserByGoogleId(profile.id)
         .then(function (user) {
-            console.log(user);
-                if(user){
-                    return done(null, user);
-                }else {
-                    var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
-                    var newGoogleUser = {
-                        username:  emailParts[0],
-                        firstName: profile.name.givenName,
-                        lastName:  profile.name.familyName,
-                        email:     email,
-                        google: {
-                            id:    profile.id,
-                            token: token
-                        }
-                    };
-                    return UserModelProject.createUser(newGoogleUser);
-                }
+            if (user) {
+                return done(null, user);
+            } else {
+                var email = profile.emails[0].value;
+                var emailParts = email.split("@");
+                var newGoogleUser = {
+                    username: emailParts[0],
+                    firstName: profile.name.givenName,
+                    lastName: profile.name.familyName,
+                    email: email,
+                    google: {
+                        id: profile.id,
+                        token: token
+                    },
+                    roles: 'reviewer'
+                };
+                return UserModelProject.createUser(newGoogleUser)
+                    .then(function (user) {
+                        var list = {
+                            "_user": user._id
+                        };
+                        ListModelProject
+                            .createList(list)
+                            .then(function (list) {
+                                var u = {
+                                    "list": list._id
+                                };
+                                UserModelProject
+                                    .updateUser(user._id, u)
+                                    .then(function () {
+                                        res.sendStatus(200);
+                                    });
+                            });
+                    });
             }
-        )
+        })
         .then(
             function (user) {
                 return done(null, user);
@@ -118,9 +128,25 @@ function deserializeUser(user, done) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
+    user.roles = ["reviewer"];
     UserModelProject
         .createUser(user)
         .then(function (user) {
+            var list = {
+                "_user": user._id
+            };
+            ListModelProject
+                .createList(list)
+                .then(function (list) {
+                    var u = {
+                        "list" : list._id
+                    };
+                    UserModelProject
+                        .updateUser(user._id, u)
+                        .then(function() {
+                            res.sendStatus(200);
+                        })
+                });
             req.login(user, function (status) {
                 res.json(user);
             });
@@ -139,6 +165,22 @@ function checkLoggedIn(req, res) {
         res.send('0');
     }
 }
+function checkAdmin(req, res) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('admin') > -1) {
+        res.json(req.user);
+    } else {
+        res.send('0');
+    }
+}
+
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.roles.indexOf('admin') > -1) {
+        next();
+    }
+    else {
+        res.sendStatus(401);
+    }
+}
 
 function login(req, res) {
     var user = req.user;
@@ -147,9 +189,27 @@ function login(req, res) {
 
 function createUser(req, res) {
     var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
+    user.roles = ["reviewer"];
     UserModelProject
         .createUser(user)
         .then(function (user) {
+            var list = {
+                "_user": user._id
+            };
+
+            ListModelProject
+                .createList(list)
+                .then(function (list) {
+                    var u = {
+                        "list" : list._id
+                    };
+                    UserModelProject
+                        .updateUser(user._id, u)
+                        .then(function() {
+                            res.sendStatus(200);
+                        });
+                });
             res.json(user);
         }, function (err) {
             res.send(err);
@@ -209,8 +269,28 @@ function deleteUser(req, res) {
     UserModelProject
         .deleteUser(userId)
         .then(function (status) {
+            ListModelProject.deleteList(userId)
+                .then(function() {
+                    res.sendStatus(200);
+                });
             res.sendStatus(200);
         });
 }
 
+function findAllUsersButYours(req, res) {
+    var userId = req.params['userId'];
+    UserModelProject
+        .findAllUsersButYours(userId)
+        .then(function (user) {
+            res.json(user);
+        });
+}
+
+function findAllUsers(req, res) {
+    UserModelProject
+        .findAllUsers()
+        .then(function (user) {
+            res.json(user);
+        });
+}
 

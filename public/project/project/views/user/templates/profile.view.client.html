@@ -1,11 +1,10 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand login">
+    <div class ="container-fluid">
+
+            <a class="navbar-brand">
                 <span class="glyphicon glyphicon-film"></span>
                 MovieTag
             </a>
-
 
         <p class="navbar-text pull-right">
             <a class="navbar-link"
@@ -13,9 +12,13 @@
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
         </p>
-        </div>
     </div>
+
+
+
 </nav>
+
+
 
 <div class="container-fluid">
     <div ng-show="vm.message" class="alert alert-info">
@@ -81,7 +84,7 @@
                 <ul class="list-group">
                     <li ng-repeat="follow in vm.list[0].following"
                         class="list-group-item">
-                        <a href="#!/profile/community/{{follow.username}}/t/true">
+                        <a href="#!/profile/community/{{follow.username}}/true">
                             {{follow.username}}
                         </a>
                     </li>
@@ -95,7 +98,7 @@
                 <ul class="list-group">
                     <li ng-repeat="follow in vm.list[0].followers"
                         class="list-group-item">
-                        <a href="#!/profile/community/{{follow.username}}/t/true">
+                        <a href="#!/profile/community/{{follow.username}}/t/t">
                             {{follow.username}}
                         </a>
                     </li>
@@ -136,7 +139,7 @@
                 <ul class="list-group">
                     <li ng-repeat="movie in vm.list[0].ratedMovies"
                         class="list-group-item">
-                        <a href="#!/profile/search/m/{{movie.id}}/t/true">
+                        <a href="#!/profile/search/m/{{movie.id}}/true">
                             {{movie.title}} : {{movie.rate}}/5
                         </a>
                     </li>
